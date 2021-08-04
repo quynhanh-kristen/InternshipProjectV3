@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Đăng nhập</title>
+		<link rel="stylesheet" href="/css/style.css" />
+		<!--Bootstrap-->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<!-- Bootstrap icons -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+		/>
+	</head>
+	<body class="login-background">
+		<div
+			class="
+				d-flex
+				flex-column
+				min-vh-100
+				justify-content-center
+				align-items-center
+				text-center
+			"
+		>
+			<form
+				action=""
+				id="loginForm"
+				class="form-floating needs-validation"
+				novalidate
+			>
+				<h3 class="mb-3">Đăng nhập</h3>
+				<div class="form-floating mb-3">
+					<input
+						type="text"
+						class="form-control"
+						id="username"
+						name="username"
+						placeholder="Tên đăng nhập"
+						required
+					/>
+					<label for="username">Tên đăng nhập</label>
+					<div class="invalid-feedback text-start">Hãy điền tên đăng nhập</div>
+				</div>
+				<div class="form-floating mb-3">
+					<input
+						type="password"
+						class="form-control"
+						id="password"
+						name="password"
+						placeholder="Mật khẩu"
+						required
+					/>
+					<label for="password">Mật khẩu</label>
+					<div class="invalid-feedback text-start">Hãy điền mật khẩu</div>
+				</div>
+				<button type="submit" class="btn btn-outline-success">Đăng nhập</button>
+			</form>
+		</div>
+		<!-- the jQuery Library -->
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			crossorigin="anonymous"
+		></script>
+		<!--Bootstrap-->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function () {
+				'use strict';
+
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.querySelectorAll('.needs-validation');
+
+				// Loop over them and prevent submission
+				Array.prototype.slice.call(forms).forEach(function (form) {
+					form.addEventListener(
+						'submit',
+						function (event) {
+							if (!form.checkValidity()) {
+								event.preventDefault();
+								event.stopPropagation();
+							}
+
+							form.classList.add('was-validated');
+						},
+						false
+					);
+				});
+			})();
+		</script>
+	</body>
+</html>

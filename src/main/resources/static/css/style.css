@@ -1,7 +1,37 @@
-.file-error-message {
-	display: none;
+#loginForm {
+	width: 80% !important;
+	border: 1px solid #333;
+	padding: 1rem 3rem;
+	background-color: #fbfbfb;
 }
 
-.show-err {
-	display: block;
+.login-background {
+	width: 100%;
+	background-image: url('../img/login-background.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+@media (min-width: 768px) {
+	#loginForm {
+		width: 50% !important;
+		height: 400px;
+		padding-top: 83px;
+	}
+}
+
+@media (min-width: 1024px) {
+	#loginForm {
+		width: 50% !important;
+		height: 400px;
+		padding-top: 68px;
+	}
+}
+
+@media (min-width: 1200px) {
+	#loginForm {
+		width: 30% !important;
+		height: 400px;
+		padding-top: 68px;
+	}
 }
