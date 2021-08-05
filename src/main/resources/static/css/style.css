@@ -5,7 +5,14 @@
 	background-color: #fbfbfb;
 }
 
-.login-background {
+#registrationForm {
+	width: 80% !important;
+	border: 1px solid #333;
+	padding: 1rem 3rem;
+	background-color: #fbfbfb;
+}
+
+.my-background {
 	width: 100%;
 	background-image: url('../img/login-background.jpg');
 	background-repeat: no-repeat;
@@ -20,6 +27,24 @@
 	bottom: 0;
 	left: 50%;
 	margin-left: -64px;
+}
+
+.login-link {
+	text-decoration: none;
+	color: #ffaf42;
+}
+
+a.login-link:hover,
+a.register-link:hover {
+	text-decoration: underline;
+	color: #ff8303;
+}
+
+em.error.help-block {
+	display: block;
+	color: red;
+	text-align: left;
+	font-size: 0.9rem;
 }
 
 @media (min-width: 320px) {
