@@ -13,7 +13,12 @@ var showDetail = function(id){
         console.log(req.responseText);
         var post = JSON.parse(req.responseText);
         document.getElementById('modalTitle').innerHTML = post.title;
-        document.getElementById('modalUrl').src = `<img class="modal__img-post" src="https://lh3.google.com/u/1/d/${post.fileID}" alt="">`;
+        if(post.fileType === "image"){
+            document.getElementById('modalImage').src = `https://lh3.google.com/u/1/d/${post.fileID}`;
+        } else if (post.fileType === "video"){
+            document.getElementById('modalVideo').innerHTML = `<iframe src="https://drive.google.com/file/d/${post.fileID}/preview" width="500" height="375" allow="autoplay"></iframe>`;
+        }
+
         document.getElementById('modalContent').innerHTML = post.content;
         document.getElementById('modalUserCreate').innerHTML = post.createdUser;
         document.getElementById('modalTotalVote').innerHTML = post.totalVote;
@@ -24,11 +29,14 @@ var showDetail = function(id){
 }
 btnCloseModal.onclick = function(){
     modal.style.display = "none";
+    document.getElementById('modalImage').src =  ``;
+    document.getElementById('modalVideo').innerHTML =  ``;
 }
 window.onclick = function(event) {
     if (event.target == contentOut) {
         modal.style.display = "none";
-        modal.style.display = "none";
+        document.getElementById('modalImage').src =  ``;
+        document.getElementById('modalVideo').innerHTML =  ``;
     }
   }
 

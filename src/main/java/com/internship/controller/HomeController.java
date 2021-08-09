@@ -32,13 +32,13 @@ public class HomeController {
         final int PAGE_SIZE = 12;
         Page<Post> postList;
         if (sortBy.equals("old")){
-            postList = postRepository.findAll(PageRequest.of(page-1, PAGE_SIZE, Sort.by("createdDate").descending()));
+            postList = postRepository.findAll(PageRequest.of(page-1, PAGE_SIZE, Sort.by("createdDate")));
         } else if (sortBy.equals("AtoZ")){
             postList = postRepository.findAll(PageRequest.of(page - 1, PAGE_SIZE, Sort.by("title")));
         } else if (sortBy.equals("ZtoA")){
             postList = postRepository.findAll(PageRequest.of(page - 1, PAGE_SIZE, Sort.by("title").descending()));
         } else {
-            postList = postRepository.findAll(PageRequest.of(page-1, PAGE_SIZE, Sort.by("createdDate")));
+            postList = postRepository.findAll(PageRequest.of(page-1, PAGE_SIZE, Sort.by("createdDate").descending()));
         }
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("postList", postList);
