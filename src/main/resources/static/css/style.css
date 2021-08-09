@@ -58,15 +58,11 @@ em.error.help-block {
 @media (min-width: 1024px) {
 	#loginForm {
 		width: 50% !important;
-		height: 400px;
-		padding-top: 60px;
 	}
 }
 
 @media (min-width: 1200px) {
 	#loginForm {
-		width: 30% !important;
-		height: 400px;
-		padding-top: 60px;
+		width: 40% !important;
 	}
 }
