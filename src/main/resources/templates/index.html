@@ -14,7 +14,9 @@
     <link rel="stylesheet" th:href="@{../fonts/fontawesome-free-5.15.1/css/all.min.css}">
     <link rel="stylesheet" th:href="@{../../css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
-
+    <script src=
+                    "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
     
 </head>
 <body>
@@ -102,7 +104,7 @@
 
                                     <div class="card-body pt-3">
                                         <div class="title-name-post" th:text="*{post.title}">Title name of post</div>
-                                        <div class="vote">
+                                        <div th:id="divVote + *{post.id}" th:onclick="|doVote(${post.id})|" class="vote">
                                             <i th:id="*{post.id}" class="far fa-heart vote_icon"></i>
                                             <!-- <i class="fas fa-heart" style="color: red;"></i> -->
                                             <span class="voting" th:text="*{post.totalVote}">12</span>

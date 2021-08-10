@@ -16,7 +16,7 @@ public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String post_id;
+    private int post_id;
     private String user_ip;
     private Date voted_date;
 
