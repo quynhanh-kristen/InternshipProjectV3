@@ -3,6 +3,7 @@ var modal = document.getElementById("myModal");
 // var btnSignUp = document.getElementsByClassName("header__navbar-item-signup")[0];
 var btnCloseModal = document.getElementsByClassName("modal-controls-back")[0];
 var contentOut = document.getElementById("contentOut");
+var ip;
 
 var showDetail = function(id){
     modal.style.display = "flex";
@@ -49,13 +50,58 @@ for(var i = 0; i < listName.length; i++){
         name = name.substring(0,19)+"...";
         document.getElementsByClassName('title-name-post')[i].innerHTML = name;
     }
-} 
-//////////////////////
-var btnSort = document.getElementById('home__fiter-btn');
-btnSort.onclick = function(){
-    if(btnSort.innerHTML === 'Mới nhất'){
-        btnSort.innerHTML = 'Cũ nhất'
+}
+//////////làm đỏ tim////////////
+ function getIpForLoadHeart(callback){
+    $.getJSON("https://api.ipify.org?format=json",
+        function(data) {
+            ip = data.ip
+            callback()
+        })
+}
+var votedPost;
+ function loadRedHeart(){
+    var req = new XMLHttpRequest();
+    req.open("GET", `/voted_post/${ip}`, true);
+    req.addEventListener('load', function(){
+        console.log(req.status);
+        console.log(req.responseText);
+        votedPost = JSON.parse(req.responseText);
+        var listVoteIcon =  document.getElementsByClassName('vote_icon');
+        for(var i = 0; i < listVoteIcon.length; i++){
+            var icon = document.getElementsByClassName('vote_icon')[i];
+            if(votedPost.includes(parseInt(icon.id))) {
+                listVoteIcon[i].classList.remove("far")
+                listVoteIcon[i].classList.add("icon_voted", "fas")
+            }
+        }
+    });
+    req.send(null);
+}
+
+getIpForLoadHeart(loadRedHeart);
+///////////Do Vote////////////
+var doVote = function (post_id){
+
+    if(votedPost.includes(parseInt(post_id))){
+        console.log("sai")
     } else {
-        btnSort.innerHTML = 'Mới nhất'
+        var req = new XMLHttpRequest();
+        req.open("GET", `/doVote?post_id=${post_id}&user_ip=${ip}`, true);
+        req.addEventListener('load', function(){
+            console.log(req.status);
+            console.log(typeof req.responseText);
+            if(req.responseText == "true"){
+                document.querySelector(`#divVote${post_id}  .vote_icon`).classList.remove("far");
+
+                document.querySelector(`#divVote${post_id}  .vote_icon`).classList.add("icon_voted", "fas");
+
+                var voting = document.querySelector(`#divVote${post_id}  .voting`).innerHTML
+                var temp = Number.parseInt(voting) + 1;
+                document.querySelector(`#divVote${post_id}  .voting`).innerHTML = temp;
+            }
+        });
+        req.send(null);
+        console.log("đúng")
     }
 }

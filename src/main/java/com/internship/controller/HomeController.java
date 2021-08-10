@@ -50,4 +50,5 @@ public class HomeController {
         Post post = postService.findById(id);
         return ResponseEntity.ok(post);
     }
+
 }

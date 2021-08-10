@@ -602,6 +602,9 @@ li{
     margin-right: 30px;
     padding: 0 10px;
 }
+.icon_voted{
+    color: red;
+}
 .modal__vote:hover, .vote:hover{
     background: #03e9f4;
     cursor: pointer;

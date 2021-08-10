@@ -14,7 +14,9 @@
     <link rel="stylesheet" th:href="@{../fonts/fontawesome-free-5.15.1/css/all.min.css}">
     <link rel="stylesheet" th:href="@{../../css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
-
+    <script src=
+                    "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
     
 </head>
 <body>
@@ -26,7 +28,7 @@
                 <div class="header__with-search">
                     <div class="header__logo">
                         <a href="/">
-                            <img src="https://lh3.google.com/u/1/d/1XuXk79aAhAV0Q9IyuyM9OQpfUccyOBG0/" alt="LOGO" class="header__qr-img">
+                            <img src="https://lh3.google.com/u/1/d/1XuXk79aAhAV0Q9IyuyM9OQpfUccyOBG0" alt="LOGO" class="header__qr-img">
                             <p style="color: white; font: 1.4em sans-serif;">ACT BRAIN VIETNAM</p>
                         </a>                        
                     </div>
@@ -37,8 +39,8 @@
 
                     <div class="header__login-logout">
                         <ul class="header__navbar-list">
-                            <li class="header__navbar-item header__navbar-item-signin header__navbar-item--strong header__navbar-item--separate">Dang nhap</li>
-                            <li class="header__navbar-item header__navbar-item-signup header__navbar-item--strong">Dang ky</li>
+                            <li class="header__navbar-item header__navbar-item-signin header__navbar-item--strong header__navbar-item--separate">Đăng nhập</li>
+                            <li class="header__navbar-item header__navbar-item-signup header__navbar-item--strong">Đăng ký</li>
                             <!-- <li class="header__navbar-item header__navbar-user">
                                 <img src="https://cf.shopee.vn/file/703b68de307972ac59159c22ba1ab738_tn" alt="" class="header__navbar-user-avatar">
                                 <span class="header__navbar-user-name">Long Demon</span>
@@ -102,8 +104,8 @@
 
                                     <div class="card-body pt-3">
                                         <div class="title-name-post" th:text="*{post.title}">Title name of post</div>
-                                        <div class="vote">
-                                            <i class="far fa-heart"></i>
+                                        <div th:id="divVote + *{post.id}" th:onclick="|doVote(${post.id})|" class="vote">
+                                            <i th:id="*{post.id}" class="far fa-heart vote_icon"></i>
                                             <!-- <i class="fas fa-heart" style="color: red;"></i> -->
                                             <span class="voting" th:text="*{post.totalVote}">12</span>
                                         </div>                                </div>
@@ -145,7 +147,7 @@
                 <img id="modalImage" class="modal__img-post" src="" alt="">
                 <div id="modalVideo"></div>
                 <div class="modal__description-post">
-                <textarea id="modalContent" name="w3review" rows="10" cols="70" >
+                <textarea id="modalContent" name="w3review" rows="10" cols="70"  disabled="disabled">
                     Content here
                 </textarea>
                 </div>
