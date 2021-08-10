@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,6 +15,7 @@ public class Post {
     private int id;
     private String title;
     private String content;
+    @Column(name = "file_id")
     private String fileID;
     private int totalVote;
     private Date createdDate;
@@ -31,4 +33,6 @@ public class Post {
         this.fileID = originalFilename;
     }
 
+//    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
+//    private List<Vote> voteList;
 }

@@ -49,13 +49,23 @@ for(var i = 0; i < listName.length; i++){
         name = name.substring(0,19)+"...";
         document.getElementsByClassName('title-name-post')[i].innerHTML = name;
     }
-} 
-//////////////////////
-var btnSort = document.getElementById('home__fiter-btn');
-btnSort.onclick = function(){
-    if(btnSort.innerHTML === 'Mới nhất'){
-        btnSort.innerHTML = 'Cũ nhất'
-    } else {
-        btnSort.innerHTML = 'Mới nhất'
-    }
 }
+//////////làm đỏ tim////////////
+
+var req = new XMLHttpRequest();
+req.open("GET", `/voted_post/116.102.84.33`, true);
+req.addEventListener('load', function(){
+    console.log(req.status);
+    console.log(req.responseText);
+    var votedPost = JSON.parse(req.responseText);
+    var listVoteIcon =  document.getElementsByClassName('vote_icon');
+    for(var i = 0; i < listVoteIcon.length; i++){
+        var icon = document.getElementsByClassName('vote_icon')[i];
+        if(votedPost.includes(icon.id)) {
+            icon.classList.remove("far")
+            icon.classList.add("icon_voted", "fas")
+        }
+    }
+});
+req.send(null);
+
