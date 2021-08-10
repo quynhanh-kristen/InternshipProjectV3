@@ -4,9 +4,6 @@ import com.google.api.client.http.AbstractInputStreamContent;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
 import com.google.api.client.http.ByteArrayContent;
-import com.google.api.client.http.FileContent;
-
-import com.internship.utils.GoogleDriveUtils;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,8 +33,6 @@ public class ImageProcessing {
 
             File f = createGoogleFile(idFolderParent, contentType, fileName, bytes);
             System.out.println(f.getId());
-//            Path path = Paths.get(folder + file.getOriginalFilename());
-//            Files.write(path, bytes);
         } catch (IOException e) {
             e.printStackTrace();
         }
