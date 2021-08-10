@@ -1,0 +1,101 @@
+:root{
+    --primary-color: #013a63;
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color:#b1a6a6;
+    --border-color: #bdbdbd; 
+
+    --header-height: 120px;
+    --navbar-height: 52px;
+    --header-with-search: calc(var(--header-height) - var(--navbar-height));
+}
+*{
+    box-sizing: inherit;
+}
+html{
+    font-size: 62.5%;
+    line-height: 1.6em;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+body{
+    margin: 0px;
+    background: linear-gradient(0,var(--primary-color), #012a4a);
+}
+/* Responsive */
+.grid{
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.grid__full-width{
+    width: 100%;
+}
+.grid__row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -12px;
+    margin-right: -12px;
+}
+/* Test */
+.grid__column-2{
+    padding-left: 12px;
+    padding-right: 12px;
+    width: 16.6667%;
+}
+.grid__column-10{
+    padding-left: 12px;
+    padding-right: 12px;
+    width: 83.3334%;
+}
+/* Modal */
+@keyframes growth {
+    from{
+        transform: scale(var(--growth-from));
+    } 
+    to{
+        transform: scale(var(--growth-to));
+    }
+}
+.modal__overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+.modal__body{
+    --growth-from: 0.7;
+    --growth-to: 1;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    animation: growth linear 0.05s;
+}
+
+/* button style */
+.btn{
+    min-width: 142px;
+    height: 34px;
+    border: none;
+    border-radius: 2px;
+    font-size: 1.4rem;
+    padding: 0px;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--white-color);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center ;
+}
+.btn.btn--primary {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+.btn--size-s{
+    height: 32px;
+    width: 200px;
+    font-size: 12px;
+    padding: 0px 8px;
+}

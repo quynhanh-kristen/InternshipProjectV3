@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 public class PostServiceImpl implements IPostService {
 
@@ -27,5 +29,22 @@ public class PostServiceImpl implements IPostService {
     @Override
     public void saveImage(MultipartFile file) {
         ImageProcessing.saveImage(file);
+    }
+
+    @Autowired
+    PostRepository postRepository;
+    @Override
+    public List<Post> findAll() {
+        return postRepository.findAll();
+    }
+
+    @Override
+    public Post findById(int id) {
+        return postRepository.findById(id).get();
+    }
+
+    @Override
+    public List<Post> findByTitle(String title) {
+        return postRepository.findByTitle(title);
     }
 }

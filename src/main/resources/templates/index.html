@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"> <!--set default CSS-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" > <!--load font-->
+    <link rel="stylesheet" th:href="@{../fonts/fontawesome-free-5.15.1/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{../../css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+
+    
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="grid">
+                
+
+                <div class="header__with-search">
+                    <div class="header__logo">
+                        <a href="/">
+                            <img src="https://lh3.google.com/u/1/d/1XuXk79aAhAV0Q9IyuyM9OQpfUccyOBG0/" alt="LOGO" class="header__qr-img">
+                            <p style="color: white; font: 1.4em sans-serif;">ACT BRAIN VIETNAM</p>
+                        </a>                        
+                    </div>
+
+                    <div class="header__with-title">
+                        <p class="event-name">Tên sự kiện</p>
+                    </div>
+
+                    <div class="header__login-logout">
+                        <ul class="header__navbar-list">
+                            <li class="header__navbar-item header__navbar-item-signin header__navbar-item--strong header__navbar-item--separate">Dang nhap</li>
+                            <li class="header__navbar-item header__navbar-item-signup header__navbar-item--strong">Dang ky</li>
+                            <!-- <li class="header__navbar-item header__navbar-user">
+                                <img src="https://cf.shopee.vn/file/703b68de307972ac59159c22ba1ab738_tn" alt="" class="header__navbar-user-avatar">
+                                <span class="header__navbar-user-name">Long Demon</span>
+                                <ul class="header-user__menu">
+                                   <li class="user-menu_item"><a href="" class="">Profile</a></li>
+                                   <li class="user-menu_item"><a href="" class="">Sign out</a></li>
+                                </ul>
+                            </li> -->
+                       </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+         <div class="container">
+            <div class="grid">
+                <div class="grid__row">
+                    <div class="home__filter">
+                        <span class="home__fiter-label">Sắp xếp theo</span>
+
+                        <div class="select__sort btn btn--primary" style="position: relative;">
+                            <span class="select__sort-label">Thời gian</span>
+                            <i class="fas fa-chevron-down"></i>
+                            <ul class="sort__menu">
+                                <li class="sort-choice"><a class="sort-link" href="/?sortBy=new">Mới nhất</a></li>
+                                <li class="sort-choice"><a class="sort-link" href="/?sortBy=old">Cũ nhất</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="select__sort btn btn--primary" style="position: relative;">
+                            <span class="select__sort-label">Tên</span>
+                            <i class="fas fa-chevron-down"></i>
+                            <ul class="sort__menu">
+                                <li class="sort-choice"><a class="sort-link" href="/?sortBy=AtoZ">A đến Z</a></li>
+                                <li class="sort-choice"><a class="sort-link" href="/?sortBy=ZtoA">Z đến A</a></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    <nav th:if="${totalPage}>1" aria-label="Page navigation example" class="Page">
+                        <ul class="pagination justify-content-end">
+                            <li th:each="index: ${#numbers.sequence(1, totalPage)}" class="page-item"
+                                th:classappend="(${page}==*{index})?'active':''">
+                                <a th:href="@{'/?sortBy=' + ${sortBy} +'&page='+*{index}}" th:text="*{index}" class="page-link" href="#"></a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class="row mb-5">
+
+
+    
+                        <!-- Show product -->
+
+                            <div  th:each="post:${postList}" class="big__card col-md-3 mt-4 pt-2">
+                                <div class="card">
+                                    <div th:onclick="|showDetail(${post.id})|" class="cart-image">
+                                        <img th:src="'https://lh3.google.com/u/1/d/' + *{post.fileID}"
+                                             class="card-img-top" alt="...">
+                                    </div>
+
+                                    <div class="card-body pt-3">
+                                        <div class="title-name-post" th:text="*{post.title}">Title name of post</div>
+                                        <div class="vote">
+                                            <i class="far fa-heart"></i>
+                                            <!-- <i class="fas fa-heart" style="color: red;"></i> -->
+                                            <span class="voting" th:text="*{post.totalVote}">12</span>
+                                        </div>                                </div>
+                                </div>
+                            </div>
+
+    
+                        <!-- end -->
+
+                    </div>
+
+                    <nav th:if="${totalPage}>1" aria-label="Page navigation example" class="Page">
+                        <ul class="pagination justify-content-end">
+                            <li th:each="index: ${#numbers.sequence(1, totalPage)}" class="page-item"
+                                th:classappend="(${page}==*{index})?'active':''">
+                                <a th:href="@{'/?sortBy=' + ${sortBy} +'&page='+*{index}}" th:text="*{index}" class="page-link" href="#"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+
+        </footer>
+    </div>
+    <div id="myModal" class="modal">
+        <div id="contentOut" class="modal__overlay">
+
+        </div>
+        <!-- ////////TEST IMAGE MODAL///////  -->
+        <div class="modal__body">
+
+            <div id="main-modal" class="main__modal">
+                <div id="modalTitle" class="modal__title-post">
+                    Title here
+                </div>
+                <img id="modalImage" class="modal__img-post" src="" alt="">
+                <div id="modalVideo"></div>
+                <div class="modal__description-post">
+                <textarea id="modalContent" name="w3review" rows="10" cols="70" >
+                    Content here
+                </textarea>
+                </div>
+                <div class="modal__footer">
+                    <div class="modal__footer-left">
+                        <p id="modalUserCreate" style="margin-bottom: 0; color: #48cae4;"> user create here</p>
+                    </div>
+                    <div class="modal__footer-right">
+                        <div class="auth__form-controls">
+                            <button class="btn modal-controls-back">TRO LAI</button>
+                        </div>
+
+                        <div class="modal__vote">
+                            <i class="far fa-heart"></i>
+                            <!-- <i class="fas fa-heart" style="color: red;"></i> -->
+                            <span id="modalTotalVote" class="voting">voting here</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- ///////////TEST VIDEO MODAL////////// -->
+<!--        <div class="modal__body">-->
+<!--                -->
+<!--            <div id="main-modal" class="main__modal">-->
+<!--                <div class="modal__title-post">-->
+<!--                    Đây là con rồng-->
+<!--                </div>-->
+<!--                <iframe src="https://drive.google.com/file/d/1yYQbYeML42qwHYo8NSvCbjobdJ3HSZiI/preview" width="500" height="375" allow="autoplay"></iframe>-->
+<!--                <div class="modal__description-post">-->
+<!--                    <textarea id="w3review" name="w3review" rows="10" cols="70" >-->
+<!--                    Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) -->
+<!--                    </textarea>    -->
+<!--                </div>-->
+<!--                <div class="modal__footer">-->
+<!--                    <div class="modal__footer-left">-->
+<!--                        <p style="margin-bottom: 0; color: #48cae4;">Nguyen Vu Long</p>-->
+<!--                    </div>-->
+<!--                    <div class="modal__footer-right">-->
+<!--                        <div class="auth__form-controls">-->
+<!--                            <button class="btn modal-controls-back">TRO LAI</button>-->
+<!--                        </div>-->
+<!--                        -->
+<!--                        <div class="modal__vote">-->
+<!--                            <i class="far fa-heart"></i>-->
+<!--                            &lt;!&ndash; <i class="fas fa-heart" style="color: red;"></i> &ndash;&gt;-->
+<!--                            <span class="voting">12</span>-->
+<!--                        </div> -->
+<!--                        -->
+<!--                    </div>-->
+<!--                    -->
+<!--                </div>-->
+<!--                   -->
+<!--            </div>  -->
+
+    </div>
+    </div>
+    <script th:src="@{../../js/index.js}"></script>
+</body>
+</html>
