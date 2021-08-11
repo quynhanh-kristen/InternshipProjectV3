@@ -35,17 +35,27 @@ $(document).ready(function () {
 	});
 });
 
+function debounce(func, timeout = 300){
+	let timer;
+	return (...args) => {
+		clearTimeout(timer);
+		timer = setTimeout(() => { func.apply(this, args); }, timeout);
+	};
+}
+
 const title = document.querySelector('#title');
 const content = document.querySelector('#content');
-
-title.addEventListener('input', checkAllWhiteSpace);
-content.addEventListener('input', checkAllWhiteSpace);
 
 function checkAllWhiteSpace() {
 	if (this.value.trim() !== '') return;
 
 	this.value = '';
 }
+
+const debounceCheckAllWhiteSpace = debounce(() => checkAllWhiteSpace());
+
+title.addEventListener('input', debounceCheckAllWhiteSpace);
+content.addEventListener('input', debounceCheckAllWhiteSpace);
 
 const MAX_IMG_SIZE = 2; //MB
 const MAX_VIDEO_SIZE = 10; //MB
@@ -112,3 +122,11 @@ function genderError(fileType) {
 			break;
 	}
 }
+
+//get reset button
+const btnReset = document.querySelector('button[type="reset"]');
+
+btnReset.addEventListener('click', () => {
+	const form = document.querySelector('#postForm');
+	form.classList.remove('was-validated');
+});
