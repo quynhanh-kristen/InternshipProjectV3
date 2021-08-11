@@ -485,6 +485,13 @@ h3{
     padding: 0;
     margin: 0;
 }
+.modal__img-post{
+    display: block;
+    max-width: 500px;
+    max-height: 395px;
+    padding: 0;
+    margin: auto;
+}
 .vote{
     padding: 0 10px;
 }
