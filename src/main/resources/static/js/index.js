@@ -1,9 +1,9 @@
 var modal = document.getElementById("myModal");
+// var btnSignIn = document.getElementsByClassName("header__navbar-item-signin")[0];
+// var btnSignUp = document.getElementsByClassName("header__navbar-item-signup")[0];
 var btnCloseModal = document.getElementsByClassName("modal-controls-back")[0];
 var contentOut = document.getElementById("contentOut");
 var ip;
-var tempIdPost;
-var votedPost;
 
 var showDetail = function(id){
     modal.style.display = "flex";
@@ -14,18 +14,14 @@ var showDetail = function(id){
         console.log(req.responseText);
         var post = JSON.parse(req.responseText);
         document.getElementById('modalTitle').innerHTML = post.title;
-        if(post.fileType.includes("image")){
-            document.getElementById('modalImage').src = `https://drive.google.com/uc?id=${post.fileID}`;
-        } else if (post.fileType.includes("video")){
+        if(post.fileType === "image"){
+            document.getElementById('modalImage').src = `https://lh3.google.com/u/1/d/${post.fileID}`;
+        } else if (post.fileType === "video"){
             document.getElementById('modalVideo').innerHTML = `<iframe src="https://drive.google.com/file/d/${post.fileID}/preview" width="500" height="375" allow="autoplay"></iframe>`;
         }
 
         document.getElementById('modalContent').innerHTML = post.content;
         document.getElementById('modalUserCreate').innerHTML = post.createdUser;
-        if(id == votedPost){
-            document.getElementById('modalIconVote').classList.remove('far');
-            document.getElementById('modalIconVote').classList.add("icon_voted", "fas");
-        }
         document.getElementById('modalTotalVote').innerHTML = post.totalVote;
     });
     req.send(null);
@@ -36,18 +32,12 @@ btnCloseModal.onclick = function(){
     modal.style.display = "none";
     document.getElementById('modalImage').src =  ``;
     document.getElementById('modalVideo').innerHTML =  ``;
-    document.getElementById('modalIconVote').classList.remove("icon_voted", "fas");
-    document.getElementById('modalIconVote').classList.add('far');
-    tempIdPost = '';
 }
 window.onclick = function(event) {
     if (event.target == contentOut) {
         modal.style.display = "none";
         document.getElementById('modalImage').src =  ``;
         document.getElementById('modalVideo').innerHTML =  ``;
-        document.getElementById('modalIconVote').classList.remove("icon_voted", "fas");
-        document.getElementById('modalIconVote').classList.add('far');
-        tempIdPost = '';
     }
   }
 
@@ -65,25 +55,24 @@ for(var i = 0; i < listName.length; i++){
  function getIpForLoadHeart(callback){
     $.getJSON("https://api.ipify.org?format=json",
         function(data) {
-            ip = data.ip;
-            callback();
+            ip = data.ip
+            callback()
         })
 }
-
+var votedPost;
  function loadRedHeart(){
     var req = new XMLHttpRequest();
     req.open("GET", `/voted_post/${ip}`, true);
     req.addEventListener('load', function(){
         console.log(req.status);
-        console.log(typeof req.responseText);
-        votedPost = req.responseText;
+        console.log(req.responseText);
+        votedPost = JSON.parse(req.responseText);
         var listVoteIcon =  document.getElementsByClassName('vote_icon');
         for(var i = 0; i < listVoteIcon.length; i++){
             var icon = document.getElementsByClassName('vote_icon')[i];
-
-            if(votedPost == icon.id) {
-                listVoteIcon[i].classList.remove("far");
-                listVoteIcon[i].classList.add("icon_voted", "fas");
+            if(votedPost.includes(parseInt(icon.id))) {
+                listVoteIcon[i].classList.remove("far")
+                listVoteIcon[i].classList.add("icon_voted", "fas")
             }
         }
     });
@@ -113,53 +102,59 @@ var doVote = function (post_id){
             }
         });
         req.send(null);
+<<<<<<<<< Temporary merge branch 1
+        console.log("đúng")
+    }
+}
+=========
     }
 }
 ///////////////////////
-var doVoteInModal = function (){
-    if(tempIdPost != ''){
-        if(votedPost){
-            if(votedPost == tempIdPost){
-                var req = new XMLHttpRequest();
-                req.open("POST", `/unVote?post_id=${tempIdPost}&user_ip=${ip}`, true);
-                req.addEventListener('load', function(){
-                    if(req.responseText == "true"){
-                        document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.remove("icon_voted", "fas");
-                        document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.add("far");
-                        var voting = document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML;
-                        var temp = Number.parseInt(voting) - 1;
-                        document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML = temp;
-
-                        document.querySelector(`.modal__vote  #modalIconVote`).classList.remove("icon_voted", "fas");
-                        document.querySelector(`.modal__vote  #modalIconVote`).classList.add("far");
-                        document.querySelector(`.modal__vote  #modalTotalVote`).innerHTML = temp;
-                        votedPost = "";
-                    }
-                });
-                req.send(null);
-            }
-
-        } else {
-            var req = new XMLHttpRequest();
-            req.open("POST", `/doVote?post_id=${tempIdPost}&user_ip=${ip}`, true);
-            req.addEventListener('load', function(){
-                if(req.responseText == "true"){
-                    document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.remove("far");
-
-                    document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.add("icon_voted", "fas");
-
-                    var voting = document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML;
-                    var temp = Number.parseInt(voting) + 1;
-                    document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML = temp;
-
-                    document.querySelector(`.modal__vote  #modalIconVote`).classList.remove("far");
-                    document.querySelector(`.modal__vote  #modalIconVote`).classList.add("icon_voted", "fas");
-                    document.querySelector(`.modal__vote  #modalTotalVote`).innerHTML = temp;
-                    votedPost = tempIdPost;
-
-                }
-            });
-            req.send(null);
-        }
-    }
-}
+// var doVoteInModal = function (){
+//     if(tempIdPost != ''){
+//         if(votedPost){
+//             if(votedPost == tempIdPost){
+//                 var req = new XMLHttpRequest();
+//                 req.open("POST", `/unVote?post_id=${tempIdPost}&user_ip=${ip}`, true);
+//                 req.addEventListener('load', function(){
+//                     if(req.responseText == "true"){
+//                         document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.remove("icon_voted", "fas");
+//                         document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.add("far");
+//                         var voting = document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML;
+//                         var temp = Number.parseInt(voting) - 1;
+//                         document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML = temp;
+//
+//                         document.querySelector(`.modal__vote  #modalIconVote`).classList.remove("icon_voted", "fas");
+//                         document.querySelector(`.modal__vote  #modalIconVote`).classList.add("far");
+//                         document.querySelector(`.modal__vote  #modalTotalVote`).innerHTML = temp;
+//                         votedPost = "";
+//                     }
+//                 });
+//                 req.send(null);
+//             }
+//
+//         } else {
+//             var req = new XMLHttpRequest();
+//             req.open("POST", `/doVote?post_id=${tempIdPost}&user_ip=${ip}`, true);
+//             req.addEventListener('load', function(){
+//                 if(req.responseText == "true"){
+//                     document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.remove("far");
+//
+//                     document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.add("icon_voted", "fas");
+//
+//                     var voting = document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML;
+//                     var temp = Number.parseInt(voting) + 1;
+//                     document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML = temp;
+//
+//                     document.querySelector(`.modal__vote  #modalIconVote`).classList.remove("far");
+//                     document.querySelector(`.modal__vote  #modalIconVote`).classList.add("icon_voted", "fas");
+//                     document.querySelector(`.modal__vote  #modalTotalVote`).innerHTML = temp;
+//                     votedPost = tempIdPost;
+//
+//                 }
+//             });
+//             req.send(null);
+//         }
+//     }
+// }
+>>>>>>>>> Temporary merge branch 2
