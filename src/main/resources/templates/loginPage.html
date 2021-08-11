@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Đăng nhập</title>
-		<link rel="stylesheet" href="/css/style.css" />
+		<link rel="stylesheet" th:href="@{/css/style.css}" />
 		<!--Bootstrap-->
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -30,11 +30,60 @@
 				text-center
 			"
 		>
+			<!-- error message -->
+			<div th:if="${param.error}"
+				class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>Lỗi! </strong>Tên đăng nhập hoặc mật khẩu không đúng!
+				<button
+						type="button"
+						class="btn-close"
+						data-bs-dismiss="alert"
+						aria-label="Close"
+				></button>
+			</div>
+
+			<div th:if="${errorMsg != null}"
+				 class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>Lỗi! </strong> <span th:text="${errorMsg}"></span>
+				<button
+						type="button"
+						class="btn-close"
+						data-bs-dismiss="alert"
+						aria-label="Close"
+				></button>
+			</div>
+
+			<!-- registration successful message -->
+			<!--/*@thymesVar id="success" type="String"*/-->
+			<div th:if="${success != null}"
+				 class="alert alert-primary alert-dismissible fade show" role="alert">
+				<strong>Thông báo! </strong> <span th:text="${success}"></span>
+				<button
+						type="button"
+						class="btn-close"
+						data-bs-dismiss="alert"
+						aria-label="Close"
+				></button>
+			</div>
+
+			<!-- logout message -->
+			<div th:if="${param.logout}"
+				 class="alert alert-primary alert-dismissible fade show" role="alert">
+				<strong>Thông báo! </strong>Bạn đã đăng xuất
+				<button
+						type="button"
+						class="btn-close"
+						data-bs-dismiss="alert"
+						aria-label="Close"
+				></button>
+			</div>
+
 			<form
-				action=""
+				th:action="@{/login}"
 				id="loginForm"
 				class="form-floating needs-validation"
 				novalidate
+				method="post"
 			>
 				<h3 class="mb-3">Đăng nhập</h3>
 				<div class="form-floating mb-3">
@@ -64,7 +113,7 @@
 					<div class="invalid-feedback text-start">Hãy điền mật khẩu</div>
 				</div>
 				<button type="submit" class="btn btn-outline-success">Đăng nhập</button>
-				<a href="#" class="register-link mb-3">Đăng ký tài khoản</a>
+				<a th:href="@{/registration}" class="register-link mb-3">Đăng ký tài khoản</a>
 			</form>
 		</div>
 		<!-- the jQuery Library -->

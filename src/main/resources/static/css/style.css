@@ -6,7 +6,7 @@
 }
 
 #registrationForm {
-	width: 80% !important;
+	width: 60% !important;
 	border: 1px solid #333;
 	padding: 1rem 3rem;
 	background-color: #fbfbfb;
@@ -52,6 +52,12 @@ em.error.help-block {
 		width: 80% !important;
 		height: 400px;
 		padding-top: 60px;
+	}
+}
+
+@media (max-width: 992px) {
+	#registrationForm {
+		width: 80% !important;
 	}
 }
 
