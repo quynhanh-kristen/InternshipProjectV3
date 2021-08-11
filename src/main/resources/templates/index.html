@@ -14,7 +14,9 @@
     <link rel="stylesheet" th:href="@{../fonts/fontawesome-free-5.15.1/css/all.min.css}">
     <link rel="stylesheet" th:href="@{../../css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src=
+                    "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
     
 </head>
 <body>
@@ -26,7 +28,7 @@
                 <div class="header__with-search">
                     <div class="header__logo">
                         <a href="/">
-                            <img src="https://drive.google.com/uc?id=1XuXk79aAhAV0Q9IyuyM9OQpfUccyOBG0" alt="LOGO" class="header__qr-img">
+                            <img src="https://lh3.google.com/u/1/d/1XuXk79aAhAV0Q9IyuyM9OQpfUccyOBG0" alt="LOGO" class="header__qr-img">
                             <p style="color: white; font: 1.4em sans-serif;">ACT BRAIN VIETNAM</p>
                         </a>                        
                     </div>
@@ -39,6 +41,14 @@
                         <ul class="header__navbar-list">
                             <li class="header__navbar-item header__navbar-item-signin header__navbar-item--strong header__navbar-item--separate">Đăng nhập</li>
                             <li class="header__navbar-item header__navbar-item-signup header__navbar-item--strong">Đăng ký</li>
+                            <!-- <li class="header__navbar-item header__navbar-user">
+                                <img src="https://cf.shopee.vn/file/703b68de307972ac59159c22ba1ab738_tn" alt="" class="header__navbar-user-avatar">
+                                <span class="header__navbar-user-name">Long Demon</span>
+                                <ul class="header-user__menu">
+                                   <li class="user-menu_item"><a href="" class="">Profile</a></li>
+                                   <li class="user-menu_item"><a href="" class="">Sign out</a></li>
+                                </ul>
+                            </li> -->
                        </ul>
                     </div>
                 </div>
@@ -88,9 +98,7 @@
                             <div  th:each="post:${postList}" class="big__card col-md-3 mt-4 pt-2">
                                 <div class="card">
                                     <div th:onclick="|showDetail(${post.id})|" class="cart-image">
-                                        <img th:if="*{post.fileType.contains('image')}" th:src="'https://drive.google.com/uc?id=' + *{post.fileID}"
-                                             class="card-img-top" alt="...">
-                                        <img th:if="*{post.fileType.contains('video')}" th:src="'https://lh3.google.com/u/1/d/' + *{post.fileID}"
+                                        <img th:src="'https://lh3.google.com/u/1/d/' + *{post.fileID}"
                                              class="card-img-top" alt="...">
                                     </div>
 
@@ -126,8 +134,10 @@
         </footer>
     </div>
     <div id="myModal" class="modal">
-        <div id="contentOut" class="modal__overlay"></div>
+        <div id="contentOut" class="modal__overlay">
 
+        </div>
+        <!-- ////////TEST IMAGE MODAL///////  -->
         <div class="modal__body">
 
             <div id="main-modal" class="main__modal">
@@ -150,8 +160,8 @@
                             <button class="btn modal-controls-back">TRO LAI</button>
                         </div>
 
-                        <div class="modal__vote" onclick="doVoteInModal()">
-                            <i id="modalIconVote" class="far fa-heart"></i>
+                        <div class="modal__vote">
+                            <i class="far fa-heart"></i>
                             <!-- <i class="fas fa-heart" style="color: red;"></i> -->
                             <span id="modalTotalVote" class="voting">voting here</span>
                         </div>
@@ -162,6 +172,40 @@
 
             </div>
         </div>
+        <!-- ///////////TEST VIDEO MODAL////////// -->
+<!--        <div class="modal__body">-->
+<!--                -->
+<!--            <div id="main-modal" class="main__modal">-->
+<!--                <div class="modal__title-post">-->
+<!--                    Đây là con rồng-->
+<!--                </div>-->
+<!--                <iframe src="https://drive.google.com/file/d/1yYQbYeML42qwHYo8NSvCbjobdJ3HSZiI/preview" width="500" height="375" allow="autoplay"></iframe>-->
+<!--                <div class="modal__description-post">-->
+<!--                    <textarea id="w3review" name="w3review" rows="10" cols="70" >-->
+<!--                    Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) Đây là đoạn text cực dài để test :))) -->
+<!--                    </textarea>    -->
+<!--                </div>-->
+<!--                <div class="modal__footer">-->
+<!--                    <div class="modal__footer-left">-->
+<!--                        <p style="margin-bottom: 0; color: #48cae4;">Nguyen Vu Long</p>-->
+<!--                    </div>-->
+<!--                    <div class="modal__footer-right">-->
+<!--                        <div class="auth__form-controls">-->
+<!--                            <button class="btn modal-controls-back">TRO LAI</button>-->
+<!--                        </div>-->
+<!--                        -->
+<!--                        <div class="modal__vote">-->
+<!--                            <i class="far fa-heart"></i>-->
+<!--                            &lt;!&ndash; <i class="fas fa-heart" style="color: red;"></i> &ndash;&gt;-->
+<!--                            <span class="voting">12</span>-->
+<!--                        </div> -->
+<!--                        -->
+<!--                    </div>-->
+<!--                    -->
+<!--                </div>-->
+<!--                   -->
+<!--            </div>  -->
+
     </div>
     </div>
     <script th:src="@{../../js/index.js}"></script>

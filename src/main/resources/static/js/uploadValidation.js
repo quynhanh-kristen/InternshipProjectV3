@@ -47,7 +47,7 @@ function checkAllWhiteSpace() {
 	this.value = '';
 }
 
-const MAX_IMG_SIZE = 1; //MB
+const MAX_IMG_SIZE = 2; //MB
 const MAX_VIDEO_SIZE = 10; //MB
 const MAX_IMG_SIZE_ERROR_MSG = `Dung lượng tối đa của file hình là ${MAX_IMG_SIZE}MB`;
 const MAX_VIDEO_SIZE_ERROR_MSG = `Dung lượng tối đa của file hình là ${MAX_VIDEO_SIZE}MB`;

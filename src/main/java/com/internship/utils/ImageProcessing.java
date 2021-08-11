@@ -5,6 +5,7 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
 import com.google.api.client.http.ByteArrayContent;
 
+import com.internship.model.Post;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -18,8 +19,8 @@ import java.util.Date;
 import java.util.List;
 
 public class ImageProcessing {
-    public static void saveImage(MultipartFile file){
-
+    public static String saveImage(MultipartFile file){
+        String fileId = null;
         try {
             byte[] bytes = file.getBytes();
 
@@ -32,9 +33,15 @@ public class ImageProcessing {
             String idFolderParent = "1cruu-rfnAwl3e-nsOt8QywvbFnT7VQ20";
 
             File f = createGoogleFile(idFolderParent, contentType, fileName, bytes);
-            System.out.println(f.getId());
+            fileId = f.getId();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally{
+            if(fileId != null){
+                return fileId;
+            }else{
+                return null;
+            }
         }
     }
 

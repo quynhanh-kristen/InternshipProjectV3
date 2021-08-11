@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VoteRepository extends JpaRepository<Vote, String> {
+public interface VoteRepository extends JpaRepository<Vote, Integer> {
     @Query("SELECT v.post_id FROM Vote v where v.user_ip = ?1")
-    public Integer findVotedPostByUserIp(String ip);
-//    public Vote findByUserIp(String ip);
+    public List<Integer> findVotedPostByUserIp(String ip);
 }

@@ -1,6 +1,5 @@
 package com.internship.service.impl;
 
-import com.internship.model.Post;
 import com.internship.model.Vote;
 import com.internship.repository.VoteRepository;
 import com.internship.service.VoteService;
@@ -21,18 +20,7 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public Integer findVotedPostByUserIp(String ip) {
+    public List<Integer> findVotedPostByUserIp(String ip) {
         return voteRepository.findVotedPostByUserIp(ip);
-    }
-
-    @Override
-    public void delete(String user_ip) {
-        Vote vote = voteRepository.findById(user_ip).get();
-        voteRepository.delete(vote);
-    }
-
-    @Override
-    public Vote findById(String user_ip) {
-        return voteRepository.findById(user_ip).get();
     }
 }
