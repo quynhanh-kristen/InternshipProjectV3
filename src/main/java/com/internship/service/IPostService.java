@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IPostService {
     void savePost(Post post);
-    void saveImage(MultipartFile file);
+    String saveImage(MultipartFile file);
     public List<Post> findAll();
     public Post findById(int id);
     public List<Post> findByTitle(String title);

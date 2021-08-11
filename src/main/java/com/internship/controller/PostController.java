@@ -25,9 +25,14 @@ public class PostController {
     public String savedUploadFile(@RequestParam("file-input")MultipartFile file,
                                   @RequestParam("title")String title,
                                   @RequestParam("content")String content){
-        Post post = new Post(title, content, file.getOriginalFilename());
-        service.savePost(post);
-        service.saveImage(file);
+        int fileTypeIndex = file.getContentType().indexOf("/");
+        Post post = new Post(title, content, file.getContentType().substring(0,fileTypeIndex));
+        String fileId = service.saveImage(file);
+        if(fileId != null){
+            post.setFileID(fileId);
+            service.savePost(post);
+        }
         return "confirm";
+
     }
 }

@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -34,10 +33,10 @@ public class Post {
 
     }
 
-    public Post(String title, String content, String originalFilename) {
-        this.title = title;
+    public Post(String title,String content, String fileType) {
         this.content = content;
-        this.fileID = originalFilename;
+        this.title = title;
+        this.fileType = fileType;
     }
 
 //    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
