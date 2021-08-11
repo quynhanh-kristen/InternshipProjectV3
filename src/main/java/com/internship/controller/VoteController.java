@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.sql.Date;
 import java.util.List;
@@ -35,24 +35,19 @@ public class VoteController {
         }
     }
 
-    @PostMapping("/doVote")
+    @GetMapping("/doVote")
     public ResponseEntity<?> doVote(@RequestParam(name = "post_id") int post_id, @RequestParam(name = "user_ip") String user_ip){
         try {
-                voteService.findById(user_ip);
-                return ResponseEntity.ok(false);
+            voteService.findById(user_ip);
+            return ResponseEntity.ok(false);
         } catch (NoSuchElementException e) {
             Vote vote = new Vote();
             vote.setPost_id(post_id);
             vote.setUser_ip(user_ip);
-            long millis=System.currentTimeMillis();
-            java.sql.Date date=new java.sql.Date(millis);
-            vote.setVoted_date(date);
-            voteService.save(vote);
 
             Post post = postService.findById(post_id);
             int voting = post.getTotalVote();
             post.setTotalVote(voting + 1);
-            postService.savePost(post);
             System.out.println("vote roi ne");
             return ResponseEntity.ok(true);
         } catch (Exception e){
@@ -77,3 +72,6 @@ public class VoteController {
         }
     }
 }
+
+
+

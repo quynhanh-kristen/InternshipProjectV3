@@ -1,6 +1,5 @@
 package com.internship.service.impl;
 
-import com.internship.model.Post;
 import com.internship.model.Vote;
 import com.internship.repository.VoteRepository;
 import com.internship.service.VoteService;

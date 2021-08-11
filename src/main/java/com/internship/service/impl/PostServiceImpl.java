@@ -27,8 +27,8 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public void saveImage(MultipartFile file) {
-        ImageProcessing.saveImage(file);
+    public String saveImage(MultipartFile file) {
+        return ImageProcessing.saveImage(file);
     }
 
     @Autowired
