@@ -45,14 +45,15 @@
                                 <a th:href="@{/registration}" style="color: #ffffff">Đăng ký</a>
                             </li>
 
-                            <li sec:authorize="isAuthenticated()" class="header__navbar-item header__navbar-user">
-                                <span class="header__navbar-user-name">Xin chào, <span sec:authentication="principal.fullName">User</span></span>
-                                <ul class="header-user__menu">
-                                    <li class="user-menu_item"><a href="/logout" class="">Sign out</a></li>
-                                </ul>
-                            </li>
                             <li sec:authorize="isAuthenticated()" class="header__navbar-item header__navbar-item--strong">
                                 <a th:href="@{/upload}" style="color: #ffffff">Đăng bài</a>
+                            </li>
+                            <li sec:authorize="isAuthenticated()" class="header__navbar-item header__navbar-user">
+                                <span class="header__navbar-user-name">Xin chào, <span sec:authentication="principal.fullName">User</span></span>
+                            </li>
+
+                            <li sec:authorize="isAuthenticated()"  class="header__navbar-item header__navbar-item--strong">
+                                <a th:href="@{/logout}" style="color: #ffffff">Đăng xuất</a>
                             </li>
                        </ul>
                     </div>
@@ -140,6 +141,23 @@
 
         </footer>
     </div>
+<!--    notice voted modal-->
+    <div id="noticeVoted_modal" class="modal">
+        <div id="noticeVoted_contentOut" class="modal__overlay"></div>
+        <div class="modal__body">
+            <div id="noticeVoted_main-modal" class="main__modal">
+                <div id="noticeVoted_modalTitle" class="modal__title-post">
+                    Ơ kìa
+                </div>
+                <div class="modal__description-post">
+                    Bạn đã vote bài khác rồi mà. THAM LAM
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<!--  Modal detail-->
     <div id="myModal" class="modal">
         <div id="contentOut" class="modal__overlay"></div>
         <div class="modal__body">
@@ -178,6 +196,9 @@
         </div>
     </div>
     </div>
+
+
+
     <script th:src="@{../../js/index.js}"></script>
 </body>
 </html>
