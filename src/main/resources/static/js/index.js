@@ -131,51 +131,51 @@ var doVote = function (post_id){
         req.send(null);
     }
 }
-///////////////////////
-// var doVoteInModal = function (){
-//     if(tempIdPost != ''){
-//         if(votedPost){
-//             if(votedPost == tempIdPost){
-//                 var req = new XMLHttpRequest();
-//                 req.open("POST", `/unVote?post_id=${tempIdPost}&user_ip=${ip}`, true);
-//                 req.addEventListener('load', function(){
-//                     if(req.responseText == "true"){
-//                         document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.remove("icon_voted", "fas");
-//                         document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.add("far");
-//                         var voting = document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML;
-//                         var temp = Number.parseInt(voting) - 1;
-//                         document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML = temp;
-//
-//                         document.querySelector(`.modal__vote  #modalIconVote`).classList.remove("icon_voted", "fas");
-//                         document.querySelector(`.modal__vote  #modalIconVote`).classList.add("far");
-//                         document.querySelector(`.modal__vote  #modalTotalVote`).innerHTML = temp;
-//                         votedPost = "";
-//                     }
-//                 });
-//                 req.send(null);
-//             }
-//
-//         } else {
-//             var req = new XMLHttpRequest();
-//             req.open("POST", `/doVote?post_id=${tempIdPost}&user_ip=${ip}`, true);
-//             req.addEventListener('load', function(){
-//                 if(req.responseText == "true"){
-//                     document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.remove("far");
-//
-//                     document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.add("icon_voted", "fas");
-//
-//                     var voting = document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML;
-//                     var temp = Number.parseInt(voting) + 1;
-//                     document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML = temp;
-//
-//                     document.querySelector(`.modal__vote  #modalIconVote`).classList.remove("far");
-//                     document.querySelector(`.modal__vote  #modalIconVote`).classList.add("icon_voted", "fas");
-//                     document.querySelector(`.modal__vote  #modalTotalVote`).innerHTML = temp;
-//                     votedPost = tempIdPost;
-//
-//                 }
-//             });
-//             req.send(null);
-//         }
-//     }
-// }
+/////////////////////
+var doVoteInModal = function (){
+    if(tempIdPost != ''){
+        if(votedPost){
+            if(votedPost == tempIdPost){
+                var req = new XMLHttpRequest();
+                req.open("POST", `/unVote?post_id=${tempIdPost}&user_ip=${ip}`, true);
+                req.addEventListener('load', function(){
+                    if(req.responseText == "true"){
+                        document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.remove("icon_voted", "fas");
+                        document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.add("far");
+                        var voting = document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML;
+                        var temp = Number.parseInt(voting) - 1;
+                        document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML = temp;
+
+                        document.querySelector(`.modal__vote  #modalIconVote`).classList.remove("icon_voted", "fas");
+                        document.querySelector(`.modal__vote  #modalIconVote`).classList.add("far");
+                        document.querySelector(`.modal__vote  #modalTotalVote`).innerHTML = temp;
+                        votedPost = "";
+                    }
+                });
+                req.send(null);
+            }
+
+        } else {
+            var req = new XMLHttpRequest();
+            req.open("POST", `/doVote?post_id=${tempIdPost}&user_ip=${ip}`, true);
+            req.addEventListener('load', function(){
+                if(req.responseText == "true"){
+                    document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.remove("far");
+
+                    document.querySelector(`#divVote${tempIdPost}  .vote_icon`).classList.add("icon_voted", "fas");
+
+                    var voting = document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML;
+                    var temp = Number.parseInt(voting) + 1;
+                    document.querySelector(`#divVote${tempIdPost}  .voting`).innerHTML = temp;
+
+                    document.querySelector(`.modal__vote  #modalIconVote`).classList.remove("far");
+                    document.querySelector(`.modal__vote  #modalIconVote`).classList.add("icon_voted", "fas");
+                    document.querySelector(`.modal__vote  #modalTotalVote`).innerHTML = temp;
+                    votedPost = tempIdPost;
+
+                }
+            });
+            req.send(null);
+        }
+    }
+}

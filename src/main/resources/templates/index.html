@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,7 @@
     <link rel="stylesheet" th:href="@{../../css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+
 </head>
 <body>
     <div class="app">
@@ -37,11 +38,21 @@
 
                     <div class="header__login-logout">
                         <ul class="header__navbar-list">
-                            <li class="header__navbar-item header__navbar-item-signin header__navbar-item--strong header__navbar-item--separate">
+                            <li sec:authorize="!isAuthenticated()"  class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">
                                 <a th:href="@{/login}" style="color: #ffffff">Đăng nhập</a>
                             </li>
-                            <li class="header__navbar-item header__navbar-item-signup header__navbar-item--strong">
+                            <li sec:authorize="!isAuthenticated()"  class="header__navbar-item header__navbar-item--strong">
                                 <a th:href="@{/registration}" style="color: #ffffff">Đăng ký</a>
+                            </li>
+
+                            <li sec:authorize="isAuthenticated()" class="header__navbar-item header__navbar-user">
+                                <span class="header__navbar-user-name">Xin chào, <span sec:authentication="principal.fullName">User</span></span>
+                                <ul class="header-user__menu">
+                                    <li class="user-menu_item"><a href="/logout" class="">Sign out</a></li>
+                                </ul>
+                            </li>
+                            <li sec:authorize="isAuthenticated()" class="header__navbar-item header__navbar-item--strong">
+                                <a th:href="@{/upload}" style="color: #ffffff">Đăng bài</a>
                             </li>
                        </ul>
                     </div>

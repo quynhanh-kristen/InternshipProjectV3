@@ -71,17 +71,16 @@
 .user-menu_item:hover{
     background-color: var(--text-color);
 }
-.header__navbar-user-avatar{
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    position: absolute;
-    right: 85%;
-    top: -8%;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-}
-.header__navbar-user-name{
-    margin-left: 20px;
+
+.header__navbar-authenticated{
+    color: white;
+    display: inline-block;
+    font-size: 1em;
+    text-decoration: none;
+    font-weight: 300;
+    margin: 0px;
+    position: relative;
+    font-size: 1.5em;
 }
 .header__navbar-item--strong{
     font-weight: 1000;

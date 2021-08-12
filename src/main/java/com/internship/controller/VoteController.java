@@ -35,7 +35,7 @@ public class VoteController {
         }
     }
 
-    @GetMapping("/doVote")
+    @PostMapping("/doVote")
     public ResponseEntity<?> doVote(@RequestParam(name = "post_id") int post_id, @RequestParam(name = "user_ip") String user_ip){
         try {
             voteService.findById(user_ip);
@@ -44,10 +44,15 @@ public class VoteController {
             Vote vote = new Vote();
             vote.setPostID(post_id);
             vote.setUserIP(user_ip);
+            long millis=System.currentTimeMillis();
+            java.sql.Date date=new java.sql.Date(millis);
+            vote.setVotedDate(date);
+            voteService.save(vote);
 
             Post post = postService.findById(post_id);
             int voting = post.getTotalVote();
             post.setTotalVote(voting + 1);
+            postService.savePost(post);
             System.out.println("vote roi ne");
             return ResponseEntity.ok(true);
         } catch (Exception e){
