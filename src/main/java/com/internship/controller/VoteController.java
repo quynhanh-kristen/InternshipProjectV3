@@ -60,7 +60,6 @@ public class VoteController {
     public ResponseEntity<?> unVote(@RequestParam(name = "post_id") int post_id, @RequestParam(name = "user_ip") String user_ip){
         try {
             voteService.delete(user_ip);
-
             Post post = postService.findById(post_id);
             int voting = post.getTotalVote();
             post.setTotalVote(voting - 1);
