@@ -10,14 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/login")
 public class AccountLoginController {
+
+    private boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || AnonymousAuthenticationToken.class.
+                isAssignableFrom(authentication.getClass())) {
+            return false;
+        }
+        return authentication.isAuthenticated();
+    }
+
     @GetMapping
     public String showLoginForm() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            return "loginPage";
+        if (isAuthenticated()) {
+            return "redirect:/";
         }
 
-        return "";
+        return "loginPage";
     }
 }
