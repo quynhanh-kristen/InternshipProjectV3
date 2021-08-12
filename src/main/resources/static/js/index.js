@@ -1,6 +1,10 @@
 var modal = document.getElementById("myModal");
 var btnCloseModal = document.getElementsByClassName("modal-controls-back")[0];
 var contentOut = document.getElementById("contentOut");
+
+var noticeVotedModal = document.getElementById("noticeVoted_modal");
+var noticeVotedContentOut = document.getElementById("noticeVoted_contentOut");
+
 var ip;
 var tempIdPost;
 var votedPost;
@@ -32,6 +36,10 @@ var showDetail = function(id){
 
 
 }
+
+var showNoticeVotedModal = function (){
+    noticeVotedModal.style.display = "flex";
+}
 btnCloseModal.onclick = function(){
     modal.style.display = "none";
     document.getElementById('modalImage').src =  ``;
@@ -48,6 +56,8 @@ window.onclick = function(event) {
         document.getElementById('modalIconVote').classList.remove("icon_voted", "fas");
         document.getElementById('modalIconVote').classList.add('far');
         tempIdPost = '';
+    } else if (event.target == noticeVotedContentOut){
+        noticeVotedModal.style.display = "none";
     }
   }
 
@@ -110,6 +120,8 @@ var doVote = function (post_id){
                 }
             });
             req.send(null);
+        } else {
+            showNoticeVotedModal();
         }
 
     } else {
@@ -153,6 +165,8 @@ var doVoteInModal = function (){
                     }
                 });
                 req.send(null);
+            } else {
+                showNoticeVotedModal();
             }
 
         } else {
