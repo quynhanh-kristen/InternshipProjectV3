@@ -1,6 +1,9 @@
 package com.internship.config;
 
+import com.internship.security.filter.BeforeAuthenticationFilter;
+import com.internship.security.handler.CustomAuthenticationFailureHandler;
 import com.internship.service.impl.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,6 +20,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private CustomAuthenticationFailureHandler failureHandler;
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserDetailsServiceImpl();
@@ -32,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
         auth.setUserDetailsService(userDetailsService());
         auth.setPasswordEncoder(passwordEncoder());
+        auth.setHideUserNotFoundExceptions(false);
         return auth;
     }
 
@@ -57,6 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .addFilterBefore(getCustomFilter(), BeforeAuthenticationFilter.class)
                 .formLogin()
                     .loginPage("/login").defaultSuccessUrl("/upload", true)
                     .permitAll()
@@ -69,5 +77,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling() //default response if the client wants to get a resource unauthorized
                 .authenticationEntryPoint(new Http403ForbiddenEntryPoint());
+    }
+
+    private BeforeAuthenticationFilter getCustomFilter() throws Exception {
+        BeforeAuthenticationFilter filter = new BeforeAuthenticationFilter();
+        filter.setAuthenticationManager(authenticationManager());
+        filter.setAuthenticationFailureHandler(failureHandler);
+        return filter;
     }
 }

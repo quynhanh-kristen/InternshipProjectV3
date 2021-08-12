@@ -1,31 +1,26 @@
 package com.internship.controller;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.internship.utils.AuthenticationCheckingUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/login")
 public class AccountLoginController {
 
-    private boolean isAuthenticated() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || AnonymousAuthenticationToken.class.
-                isAssignableFrom(authentication.getClass())) {
-            return false;
-        }
-        return authentication.isAuthenticated();
-    }
-
     @GetMapping
     public String showLoginForm() {
-        if (isAuthenticated()) {
+        if (AuthenticationCheckingUtils.isAuthenticated()) {
             return "redirect:/";
         }
 
+        return "loginPage";
+    }
+
+    @PostMapping
+    public String showLoginFormPost() {
         return "loginPage";
     }
 }

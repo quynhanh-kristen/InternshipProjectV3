@@ -2,7 +2,6 @@ package com.internship.service.impl;
 
 import com.internship.dto.MyUserDetails;
 import com.internship.model.Account;
-import com.internship.model.Role;
 import com.internship.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

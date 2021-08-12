@@ -1,6 +1,8 @@
 package com.internship.controller;
 
 import com.internship.dto.AccountRegistrationDTO;
+import com.internship.service.IAccountService;
+import com.internship.utils.AuthenticationCheckingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,7 @@ import javax.validation.Valid;
 public class AccountRegisterController {
 
     @Autowired
-    private com.internship.service.IAccountService IAccountService;
+    private IAccountService IAccountService;
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -32,6 +34,10 @@ public class AccountRegisterController {
 
     @GetMapping
     public String showRegistrationForm() {
+        if (AuthenticationCheckingUtils.isAuthenticated()) {
+            return "redirect:/";
+        }
+
         return "registrationPage";
     }
 
