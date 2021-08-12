@@ -95,6 +95,8 @@
 						placeholder="Tên đăng nhập"
 						maxlength="15"
 						required
+						th:value="${username}"
+						th:classappend="${usernameErr != null ? 'is-invalid' : ''}"
 					/>
 					<label for="username">Tên đăng nhập</label>
 					<div class="invalid-feedback text-start">Hãy điền tên đăng nhập</div>
@@ -108,6 +110,7 @@
 						placeholder="Mật khẩu"
 						maxlength="20"
 						required
+						th:classappend="${passwordErr != null ? 'is-invalid' : ''}"
 					/>
 					<label for="password">Mật khẩu</label>
 					<div class="invalid-feedback text-start">Hãy điền mật khẩu</div>
