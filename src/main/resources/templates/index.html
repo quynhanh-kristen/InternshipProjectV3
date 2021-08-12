@@ -37,8 +37,12 @@
 
                     <div class="header__login-logout">
                         <ul class="header__navbar-list">
-                            <li class="header__navbar-item header__navbar-item-signin header__navbar-item--strong header__navbar-item--separate">Đăng nhập</li>
-                            <li class="header__navbar-item header__navbar-item-signup header__navbar-item--strong">Đăng ký</li>
+                            <li class="header__navbar-item header__navbar-item-signin header__navbar-item--strong header__navbar-item--separate">
+                                <a th:href="@{/login}" style="color: #ffffff">Đăng nhập</a>
+                            </li>
+                            <li class="header__navbar-item header__navbar-item-signup header__navbar-item--strong">
+                                <a th:href="@{/registration}" style="color: #ffffff">Đăng ký</a>
+                            </li>
                        </ul>
                     </div>
                 </div>

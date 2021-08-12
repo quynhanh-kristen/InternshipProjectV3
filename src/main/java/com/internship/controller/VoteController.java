@@ -42,8 +42,8 @@ public class VoteController {
             return ResponseEntity.ok(false);
         } catch (NoSuchElementException e) {
             Vote vote = new Vote();
-            vote.setPost_id(post_id);
-            vote.setUser_ip(user_ip);
+            vote.setPostID(post_id);
+            vote.setUserIP(user_ip);
 
             Post post = postService.findById(post_id);
             int voting = post.getTotalVote();
