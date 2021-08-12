@@ -9,9 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private AccountRepository accountRepository;
@@ -22,9 +19,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(account == null) {
             throw new UsernameNotFoundException("Tên đăng nhập hoặc mật khẩu không đúng");
         }
-
-        Collection<Role> roles = new ArrayList<>();
-        roles.add(account.getRole());
 
         return new MyUserDetails(account);
     }

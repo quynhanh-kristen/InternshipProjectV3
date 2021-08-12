@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, String> {
-    @Query("SELECT v.post_id FROM Vote v where v.user_ip = ?1")
+    @Query("SELECT v.postID FROM Vote v where v.userIP = ?1")
     public Integer findVotedPostByUserIp(String ip);
 }

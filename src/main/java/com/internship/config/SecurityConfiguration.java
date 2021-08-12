@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers("/upload", "/save", "/logout", "/confirm").hasAuthority("uploader")
                 .antMatchers(
                         "/registration**",
@@ -50,8 +50,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/img/**",
                         "/",
-                        "/voted_post**",
-                        "/doVote"
+                        "/voted_post/**",
+                        "/doVote**",
+                        "/unVote**",
+                        "/posts/**"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()

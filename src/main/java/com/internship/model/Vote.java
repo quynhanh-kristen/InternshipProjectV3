@@ -12,9 +12,14 @@ import java.sql.Date;
 
 public class Vote {
     @Id
-    private String user_ip;
-    private int post_id;
-    private Date voted_date;
+    @Column(name = "user_ip")
+    private String userIP;
+
+    @Column(name = "post_id")
+    private int postID;
+
+    @Column(name = "voted_date")
+    private Date votedDate;
 
 //    @ManyToOne
 //    @JoinColumn(name = "post_id")
