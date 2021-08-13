@@ -17,9 +17,6 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
         super.setDefaultFailureUrl("/login");
         super.setUseForward(true);
         super.onAuthenticationFailure(request, response, exception);
-
-//        exception.printStackTrace();
-//        System.out.println(">> Error: " + exception.getMessage());
     }
 
 }
