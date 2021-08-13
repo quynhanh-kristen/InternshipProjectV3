@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trang chủ</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -16,7 +16,11 @@
     <link rel="stylesheet" th:href="@{../../css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <style th:if="${postList == null}">
+        html{
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
     <div class="app">
@@ -38,21 +42,21 @@
 
                     <div class="header__login-logout">
                         <ul class="header__navbar-list">
-                            <li sec:authorize="!isAuthenticated()"  class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">
+                            <li sec:authorize="!isAuthenticated()"  class="header__navbar-item header__navbar-item-hover header__navbar-item--strong header__navbar-item--separate">
                                 <a th:href="@{/login}" style="color: #ffffff">Đăng nhập</a>
                             </li>
-                            <li sec:authorize="!isAuthenticated()"  class="header__navbar-item header__navbar-item--strong">
+                            <li sec:authorize="!isAuthenticated()"  class="header__navbar-item header__navbar-item-hover header__navbar-item--strong">
                                 <a th:href="@{/registration}" style="color: #ffffff">Đăng ký</a>
                             </li>
 
-                            <li sec:authorize="isAuthenticated()" class="header__navbar-item header__navbar-item--strong">
-                                <a th:href="@{/upload}" style="color: #ffffff">Đăng bài</a>
-                            </li>
-                            <li sec:authorize="isAuthenticated()" class="header__navbar-item header__navbar-user">
+
+                            <li sec:authorize="isAuthenticated()" class="header__navbar-item header__navbar-user" style="cursor: default;">
                                 <span class="header__navbar-user-name">Xin chào, <span sec:authentication="principal.fullName">User</span></span>
                             </li>
-
-                            <li sec:authorize="isAuthenticated()"  class="header__navbar-item header__navbar-item--strong">
+                            <li sec:authorize="isAuthenticated()" class="header__navbar-item header__navbar-item-hover header__navbar-item--strong">
+                                <a th:href="@{/upload}" style="color: #ffffff">Đăng bài</a>
+                            </li>
+                            <li sec:authorize="isAuthenticated()"  class="header__navbar-item header__navbar-item-hover header__navbar-item--strong">
                                 <a th:href="@{/logout}" style="color: #ffffff">Đăng xuất</a>
                             </li>
                        </ul>
@@ -86,6 +90,7 @@
                         </div>
                         
                     </div>
+                    <div th:if="${postList != null}">
                     <nav th:if="${totalPage}>1" aria-label="Page navigation example" class="Page">
                         <ul class="pagination justify-content-end">
                             <li th:each="index: ${#numbers.sequence(1, totalPage)}" class="page-item"
@@ -96,33 +101,28 @@
                     </nav>
 
                     <div class="row mb-5">
-
-
-    
                         <!-- Show product -->
 
-                            <div  th:each="post:${postList}" class="big__card col-md-3 mt-4 pt-2">
-                                <div class="card">
-                                    <div th:onclick="|showDetail(${post.id})|" class="cart-image">
-                                        <img th:if="*{post.fileType.contains('image')}" th:src="'https://drive.google.com/uc?id=' + *{post.fileID}"
-                                             class="card-img-top" alt="...">
-                                        <img th:if="*{post.fileType.contains('video')}" th:src="'https://lh3.google.com/u/1/d/' + *{post.fileID}"
-                                             class="card-img-top" alt="...">
-                                    </div>
-
-                                    <div class="card-body pt-3">
-                                        <div class="title-name-post" th:text="*{post.title}">Title name of post</div>
-                                        <div th:id="divVote + *{post.id}" th:onclick="|doVote(${post.id})|" class="vote">
-                                            <i th:id="*{post.id}" class="far fa-heart vote_icon"></i>
-                                            <!-- <i class="fas fa-heart" style="color: red;"></i> -->
-                                            <span class="voting" th:text="*{post.totalVote}">12</span>
-                                        </div>                                </div>
+                        <div  th:each="post:${postList}" class="big__card col-md-3 mt-4 pt-2">
+                            <div class="card">
+                                <div th:onclick="|showDetail(${post.id})|" class="cart-image">
+                                    <img th:if="*{post.fileType.contains('image')}" th:src="'https://drive.google.com/uc?id=' + *{post.fileID}"
+                                         class="card-img-top" alt="...">
+                                    <img th:if="*{post.fileType.contains('video')}" th:src="'https://lh3.google.com/u/1/d/' + *{post.fileID}"
+                                         class="card-img-top" alt="...">
                                 </div>
+
+                                <div class="card-body pt-3">
+                                    <div class="title-name-post" th:text="*{post.title}">Title name of post</div>
+                                    <div th:id="divVote + *{post.id}" th:onclick="|doVote(${post.id})|" class="vote">
+                                        <i th:id="*{post.id}" class="far fa-heart vote_icon"></i>
+                                        <!-- <i class="fas fa-heart" style="color: red;"></i> -->
+                                        <span class="voting" th:text="*{post.totalVote}">12</span>
+                                    </div>                                </div>
                             </div>
+                        </div>
 
-    
                         <!-- end -->
-
                     </div>
 
                     <nav th:if="${totalPage}>1" aria-label="Page navigation example" class="Page">
@@ -133,6 +133,10 @@
                             </li>
                         </ul>
                     </nav>
+                    </div>
+                    <div th:if="${postList == null}">
+                        <div class="notice-page-empty">Hiện chưa có bài đăng nào</div>
+                    </div>
                 </div>
             </div>
         </div>

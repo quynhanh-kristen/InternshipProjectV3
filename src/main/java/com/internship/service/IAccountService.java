@@ -11,4 +11,5 @@ public interface IAccountService {
     Boolean isValidEmail(String email);
     Boolean isValidPhoneNumber(String phoneNumber);
     Boolean isConfirmPasswordEqualPassword(String password, String confirmPassword);
+    Account findByUsername(String username);
 }

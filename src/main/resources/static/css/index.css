@@ -9,6 +9,15 @@
     text-align: center;
     flex: 1;
 }
+.notice-page-empty{
+    font-size: 3rem;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+}
 .event-name{
     font-size: 3rem;
     font-family: 'Times new roman';
@@ -94,7 +103,7 @@
     margin: 0px 8px;
 }
 
-.header__navbar-item:hover{
+.header__navbar-item-hover:hover{
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
 }
@@ -560,7 +569,9 @@ li{
     left: 0;
     animation: fadeIn linear 0.2s;
 }
-
+#noticeVoted_modal{
+    z-index: 1100;
+}
 .main__modal{
     display: flex;
     flex-direction: column;
@@ -607,6 +618,7 @@ li{
     color: white;
     margin-right: 30px;
     padding: 0 10px;
+    text-align: center;
 }
 .icon_voted{
     color: red;
