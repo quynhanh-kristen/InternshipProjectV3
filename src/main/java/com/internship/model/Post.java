@@ -1,9 +1,11 @@
 package com.internship.model;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Data
@@ -20,6 +22,7 @@ public class Post {
     private String fileID;
     @Column(name="total_vote")
     private int totalVote;
+
     @Column(name="created_date")
     private Date createdDate;
     @Column(name="modified_date")

@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
+
 @Controller
 public class PostController {
 
@@ -28,6 +30,7 @@ public class PostController {
         Post post = new Post(title, content, file.getContentType());
         String fileId = service.saveImage(file);
         if(fileId != null){
+            post.setCreatedDate(new Date());
             post.setFileID(fileId);
             service.savePost(post);
         }
