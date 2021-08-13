@@ -1,8 +1,10 @@
 package com.internship.controller;
 
 
+import com.internship.model.Account;
 import com.internship.model.Post;
 import com.internship.repository.PostRepository;
+import com.internship.service.IAccountService;
 import com.internship.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HomeController {
     @Autowired
     IPostService postService;
+
+    @Autowired
+    IAccountService accountService;
 
     @Autowired
     PostRepository postRepository;
@@ -48,6 +53,11 @@ public class HomeController {
     @GetMapping("/posts/{id}")
     public ResponseEntity<?> findByid(@PathVariable(name = "id") int id){
         Post post = postService.findById(id);
+        if(post != null){
+            Account account = accountService.findByUsername(post.getCreatedUser());
+            post.setCreatedUser(account.getFullName());
+        }
+
         return ResponseEntity.ok(post);
     }
 

@@ -72,4 +72,9 @@ public class AccountServiceImpl implements IAccountService {
     public Boolean isConfirmPasswordEqualPassword(String password, String confirmPassword) {
         return confirmPassword.equalsIgnoreCase(password);
     }
+
+    @Override
+    public Account findByUsername(String username) {
+        return accountRepository.findByUsername(username);
+    }
 }
