@@ -2,11 +2,14 @@ package com.internship.config;
 
 import com.internship.security.filter.BeforeAuthenticationFilter;
 import com.internship.security.handler.CustomAuthenticationFailureHandler;
+import com.internship.security.handler.CustomAuthenticationSuccessHandler;
 import com.internship.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,9 +22,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private CustomAuthenticationFailureHandler failureHandler;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -47,6 +47,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
+    @Autowired
+    public BeforeAuthenticationFilter beforeAuthenticationFilter;
+
+    @Autowired
+    private CustomAuthenticationFailureHandler failureHandler;
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler successHandler;
+
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
@@ -64,9 +79,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(getCustomFilter(), BeforeAuthenticationFilter.class)
+                .addFilterBefore(beforeAuthenticationFilter, BeforeAuthenticationFilter.class)
                 .formLogin()
-                    .loginPage("/login").defaultSuccessUrl("/upload", true)
+                    .loginPage("/login")
                     .permitAll()
                 .and()
                 .logout()
@@ -77,12 +92,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling() //default response if the client wants to get a resource unauthorized
                 .authenticationEntryPoint(new Http403ForbiddenEntryPoint());
-    }
-
-    private BeforeAuthenticationFilter getCustomFilter() throws Exception {
-        BeforeAuthenticationFilter filter = new BeforeAuthenticationFilter();
-        filter.setAuthenticationManager(authenticationManager());
-        filter.setAuthenticationFailureHandler(failureHandler);
-        return filter;
     }
 }
