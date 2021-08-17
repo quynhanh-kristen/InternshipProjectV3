@@ -35,7 +35,7 @@ $(document).ready(function () {
 	});
 });
 
-function debounce(func, timeout = 300){
+function debounce(func, timeout = 250){
 	let timer;
 	return (...args) => {
 		clearTimeout(timer);
@@ -46,13 +46,13 @@ function debounce(func, timeout = 300){
 const title = document.querySelector('#title');
 const content = document.querySelector('#content');
 
-function checkAllWhiteSpace() {
-	if (this.value.trim() !== '') return;
+function checkAllWhiteSpace(e) {
+	if (e.target.value.trim() !== '') return;
 
-	this.value = '';
+	e.target.value = '';
 }
 
-const debounceCheckAllWhiteSpace = debounce(() => checkAllWhiteSpace());
+const debounceCheckAllWhiteSpace = debounce((e) => checkAllWhiteSpace(e));
 
 title.addEventListener('input', debounceCheckAllWhiteSpace);
 content.addEventListener('input', debounceCheckAllWhiteSpace);

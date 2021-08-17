@@ -67,7 +67,7 @@ public class BeforeAuthenticationFilter extends UsernamePasswordAuthenticationFi
         }
 
         //keep username
-        request.setAttribute("username", username);
+        request.setAttribute("username", username.trim());
 
         //check if password is empty
         if(password.trim().isEmpty()) {
