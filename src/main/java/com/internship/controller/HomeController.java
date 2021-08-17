@@ -6,6 +6,7 @@ import com.internship.model.Post;
 import com.internship.repository.PostRepository;
 import com.internship.service.IAccountService;
 import com.internship.service.IPostService;
+import com.internship.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 
 @Controller
@@ -33,6 +38,7 @@ public class HomeController {
                              @RequestParam(name = "page", defaultValue = "1") Integer page,
                              @RequestParam(name = "sortBy", defaultValue = "new") String sortBy){
         final int PAGE_SIZE = 12;
+
         Page<Post> postList;
         if (sortBy.equals("old")){
             postList = postRepository.findAll(PageRequest.of(page-1, PAGE_SIZE, Sort.by("createdDate")));
@@ -47,6 +53,7 @@ public class HomeController {
         model.addAttribute("postList", postList);
         model.addAttribute("page", page);
         model.addAttribute("totalPage", postList.getTotalPages());
+
         return "index";
     }
 

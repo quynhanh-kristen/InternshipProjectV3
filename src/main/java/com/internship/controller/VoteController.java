@@ -3,6 +3,7 @@ package com.internship.controller;
 import com.internship.model.Post;
 import com.internship.model.Vote;
 import com.internship.service.IPostService;
+import com.internship.service.RequestService;
 import com.internship.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,10 +27,15 @@ public class VoteController {
     @Autowired
     IPostService postService;
 
+    @Autowired
+    RequestService requestService;
+
     @GetMapping("/voted_post/{ip}")
-    public ResponseEntity<?> findVoteByIp(@PathVariable(name = "ip") String ip){
+    public ResponseEntity<?> findVoteByIp(@PathVariable(name = "ip") String ip, HttpServletRequest request){
+        String clientIp = requestService.getClientIp(request);
+
         try {
-            int votedPost = voteService.findVotedPostByUserIp(ip);
+            int votedPost = voteService.findVotedPostByUserIp(clientIp);
             return ResponseEntity.ok(votedPost);
         } catch (NullPointerException e){
             return ResponseEntity.ok(null);
@@ -36,14 +43,16 @@ public class VoteController {
     }
 
     @PostMapping("/doVote")
-    public ResponseEntity<?> doVote(@RequestParam(name = "post_id") int post_id, @RequestParam(name = "user_ip") String user_ip){
+    public ResponseEntity<?> doVote(@RequestParam(name = "post_id") int post_id, @RequestParam(name = "user_ip") String user_ip,
+                                    HttpServletRequest request){
+        String clientIp = requestService.getClientIp(request);
         try {
-            voteService.findById(user_ip);
+            voteService.findById(clientIp);
             return ResponseEntity.ok(false);
         } catch (NoSuchElementException e) {
             Vote vote = new Vote();
             vote.setPostID(post_id);
-            vote.setUserIP(user_ip);
+            vote.setUserIP(clientIp);
             long millis=System.currentTimeMillis();
             java.sql.Date date=new java.sql.Date(millis);
             vote.setVotedDate(date);
@@ -62,9 +71,12 @@ public class VoteController {
     }
 
     @PostMapping("/unVote")
-    public ResponseEntity<?> unVote(@RequestParam(name = "post_id") int post_id, @RequestParam(name = "user_ip") String user_ip){
+    public ResponseEntity<?> unVote(@RequestParam(name = "post_id") int post_id, @RequestParam(name = "user_ip") String user_ip,
+                                    HttpServletRequest request){
+        String clientIp = requestService.getClientIp(request);
+
         try {
-            voteService.delete(user_ip);
+            voteService.delete(clientIp);
             Post post = postService.findById(post_id);
             int voting = post.getTotalVote();
             post.setTotalVote(voting - 1);
