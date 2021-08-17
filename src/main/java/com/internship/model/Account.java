@@ -4,6 +4,7 @@ package com.internship.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Account {
+public class Account implements Serializable {
     @Id
     @Column(name = "username")
     @NonNull

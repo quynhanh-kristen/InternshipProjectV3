@@ -4,13 +4,14 @@ import lombok.Data;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Data
 @Table(name = "IP_Vote")
 
-public class Vote {
+public class Vote implements Serializable {
     @Id
     @Column(name = "user_ip")
     private String userIP;

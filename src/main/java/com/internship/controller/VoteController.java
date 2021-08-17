@@ -3,6 +3,7 @@ package com.internship.controller;
 import com.internship.model.Post;
 import com.internship.model.Vote;
 import com.internship.service.IPostService;
+import com.internship.service.RequestService;
 import com.internship.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,6 +27,9 @@ public class VoteController {
     @Autowired
     IPostService postService;
 
+    @Autowired
+    RequestService requestService;
+
     @GetMapping("/voted_post/{ip}")
     public ResponseEntity<?> findVoteByIp(@PathVariable(name = "ip") String ip){
         try {
@@ -36,7 +41,10 @@ public class VoteController {
     }
 
     @PostMapping("/doVote")
-    public ResponseEntity<?> doVote(@RequestParam(name = "post_id") int post_id, @RequestParam(name = "user_ip") String user_ip){
+    public ResponseEntity<?> doVote(@RequestParam(name = "post_id") int post_id,
+                                    @RequestParam(name = "user_ip") String user_ip,
+                                    HttpServletRequest request){
+        user_ip = requestService.getClientIp(request);
         try {
             voteService.findById(user_ip);
             return ResponseEntity.ok(false);

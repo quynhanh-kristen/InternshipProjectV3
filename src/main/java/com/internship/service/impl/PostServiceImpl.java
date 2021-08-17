@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -27,7 +28,7 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public String saveImage(MultipartFile file) {
+    public String saveImage(MultipartFile file) throws IOException {
         return ImageProcessing.saveImage(file);
     }
 

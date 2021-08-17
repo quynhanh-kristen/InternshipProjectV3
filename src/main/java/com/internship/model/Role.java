@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "IP_Role")
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Role {
+public class Role implements Serializable {
     @Id
     @NonNull
     @Column(name = "id")
