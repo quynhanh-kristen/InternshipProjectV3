@@ -46,6 +46,14 @@ public class BeforeAuthenticationFilter extends UsernamePasswordAuthenticationFi
         super.setAuthenticationFailureHandler(failureHandler);
     }
 
+    private void forward(HttpServletRequest request, HttpServletResponse response, String url) {
+        try {
+            request.getRequestDispatcher(url).forward(request, response);
+        }catch (ServletException | IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         String username = request.getParameter("username");
@@ -86,14 +94,19 @@ public class BeforeAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 ex.printStackTrace();
             }
         }
+
+        Authentication auth = null;
+
         try {
-            return super.attemptAuthentication(request, response);
+            auth = super.attemptAuthentication(request, response);
         } catch (BadCredentialsException badCredentialsException) {
             request.setAttribute("errorMsg", "Mật khẩu không đúng");
+            forward(request, response, "/login");
         } catch(UsernameNotFoundException usernameNotFoundException) {
             request.setAttribute("errorMsg", "Tên đăng nhập không tồn tại");
+            forward(request, response, "/login");
         }
 
-        return super.attemptAuthentication(request, response);
+        return auth;
     }
 }

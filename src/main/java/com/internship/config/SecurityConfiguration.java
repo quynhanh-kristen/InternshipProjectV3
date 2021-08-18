@@ -1,8 +1,6 @@
 package com.internship.config;
 
 import com.internship.security.filter.BeforeAuthenticationFilter;
-import com.internship.security.handler.CustomAuthenticationFailureHandler;
-import com.internship.security.handler.CustomAuthenticationSuccessHandler;
 import com.internship.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -50,12 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public BeforeAuthenticationFilter beforeAuthenticationFilter;
-
-    @Autowired
-    private CustomAuthenticationFailureHandler failureHandler;
-
-    @Autowired
-    private CustomAuthenticationSuccessHandler successHandler;
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
     @Override
