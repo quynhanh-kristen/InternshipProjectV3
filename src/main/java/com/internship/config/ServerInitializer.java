@@ -28,8 +28,6 @@ public class ServerInitializer implements ApplicationRunner {
             uploadFolder.mkdirs();
         }
 
-        System.out.println(LOCAL_FOLDER);
-
         //list files in local
         String contents[] = SAVED_FILE.list();
         for (String content: contents) {
