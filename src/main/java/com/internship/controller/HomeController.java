@@ -36,12 +36,28 @@ public class HomeController {
         Page<Post> postList;
         if (sortBy.equals("old")){
             postList = postRepository.findAll(PageRequest.of(page-1, PAGE_SIZE, Sort.by("createdDate")));
+            if(page > postList.getTotalPages() && page != 1){
+                page = postList.getTotalPages();
+                postList = postRepository.findAll(PageRequest.of(page-1, PAGE_SIZE, Sort.by("createdDate")));
+            }
         } else if (sortBy.equals("AtoZ")){
             postList = postRepository.findAll(PageRequest.of(page - 1, PAGE_SIZE, Sort.by("title")));
+            if(page > postList.getTotalPages() && page != 1){
+                page = postList.getTotalPages();
+                postList = postRepository.findAll(PageRequest.of(page - 1, PAGE_SIZE, Sort.by("title")));
+            }
         } else if (sortBy.equals("ZtoA")){
             postList = postRepository.findAll(PageRequest.of(page - 1, PAGE_SIZE, Sort.by("title").descending()));
+            if(page > postList.getTotalPages() && page != 1){
+                page = postList.getTotalPages();
+                postList = postRepository.findAll(PageRequest.of(page - 1, PAGE_SIZE, Sort.by("title").descending()));
+            }
         } else {
             postList = postRepository.findAll(PageRequest.of(page-1, PAGE_SIZE, Sort.by("createdDate").descending()));
+            if(page > postList.getTotalPages() && page != 1){
+                page = postList.getTotalPages();
+                postList = postRepository.findAll(PageRequest.of(page-1, PAGE_SIZE, Sort.by("createdDate").descending()));
+            }
         }
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("postList", postList);
@@ -51,7 +67,7 @@ public class HomeController {
     }
 
     @GetMapping("/posts/{id}")
-    public ResponseEntity<?> findByid(@PathVariable(name = "id") int id){
+    public ResponseEntity<?> findById(@PathVariable(name = "id") int id){
         Post post = postService.findById(id);
         if(post != null){
             Account account = accountService.findByUsername(post.getCreatedUser());

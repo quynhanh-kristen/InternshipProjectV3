@@ -40,9 +40,8 @@ public class VoteController {
 
     @PostMapping("/doVote")
     public ResponseEntity<?> doVote(@RequestParam(name = "post_id") int post_id,
-                                    @RequestParam(name = "user_ip") String user_ip,
                                     HttpServletRequest request){
-        user_ip = requestService.getClientIp(request);
+        String user_ip = requestService.getClientIp(request);
         try {
             voteService.findById(user_ip);
             return ResponseEntity.ok(false);
@@ -69,9 +68,8 @@ public class VoteController {
 
     @PostMapping("/unVote")
     public ResponseEntity<?> unVote(@RequestParam(name = "post_id") int post_id,
-                                    @RequestParam(name = "user_ip") String user_ip,
                                     HttpServletRequest request){
-        user_ip = requestService.getClientIp(request);
+        String user_ip = requestService.getClientIp(request);
         try {
             voteService.delete(user_ip);
             Post post = postService.findById(post_id);

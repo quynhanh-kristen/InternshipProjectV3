@@ -37,7 +37,19 @@ public class Post implements Serializable {
 
     }
 
-    public Post(String title,String content, String fileType) {
+    public Post(int id, String title, String content, String fileID, int totalVote, Date createdDate, Date modifiedDate, String createdUser, String fileType) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.fileID = fileID;
+        this.totalVote = totalVote;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+        this.createdUser = createdUser;
+        this.fileType = fileType;
+    }
+
+    public Post(String title, String content, String fileType) {
         this.content = content;
         this.title = title;
         this.fileType = fileType;
