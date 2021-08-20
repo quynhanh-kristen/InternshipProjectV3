@@ -20,7 +20,8 @@ public class ServerInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        String path = context.getRealPath("/") + "WEB-INF\\classes\\static\\uploadFiles";
+//        String path = context.getRealPath("/") + "WEB-INF\\classes\\static\\uploadFiles";
+        String path = "uploadFiles";
 
         File uploadFolder = new File(path);
 

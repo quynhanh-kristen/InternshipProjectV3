@@ -1,4 +1,4 @@
-package com.internship.service.impl;
+package com.internship.InternshipProjectV3.post.impl;
 
 import com.internship.dto.AccountRegistrationDTO;
 import com.internship.model.Account;

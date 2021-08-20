@@ -1,7 +1,7 @@
 package com.internship.config;
 
 import com.internship.security.filter.BeforeAuthenticationFilter;
-import com.internship.service.impl.UserDetailsServiceImpl;
+import com.internship.InternshipProjectV3.post.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -58,7 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .and().authorizeRequests()
+                .and()
+                .authorizeRequests()
                 .antMatchers("/upload", "/save", "/logout", "/confirm").hasAuthority("uploader")
                 .antMatchers(
                         "/registration**",

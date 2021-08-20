@@ -14,8 +14,8 @@
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"> <!--set default CSS-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" > <!--load font-->
-    <link rel="stylesheet" th:href="@{../fonts/fontawesome-free-5.15.1/css/all.min.css}">
-    <link rel="stylesheet" th:href="@{../../css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/fontawesome-free-5.15.1/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style th:if="${postList == null}">
@@ -33,7 +33,8 @@
                 <div class="header__with-search">
                     <div class="header__logo">
                         <a href="/">
-                            <img src="https://drive.google.com/uc?id=1XuXk79aAhAV0Q9IyuyM9OQpfUccyOBG0" alt="LOGO" class="header__qr-img">
+                            <img th:src="@{img/logo.png}" alt="LOGO" class="header__qr-img">
+<!--                            <img src="https://drive.google.com/uc?id=1XuXk79aAhAV0Q9IyuyM9OQpfUccyOBG0" alt="LOGO" class="header__qr-img">-->
                             <p style="color: white; font: 1.4em sans-serif;">ACT BRAIN VIETNAM</p>
                         </a>                        
                     </div>
@@ -202,9 +203,6 @@
         </div>
     </div>
     </div>
-
-
-
-    <script th:src="@{../../js/index.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
 </body>
 </html>

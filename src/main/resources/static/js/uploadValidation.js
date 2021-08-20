@@ -60,7 +60,7 @@ content.addEventListener('input', debounceCheckAllWhiteSpace);
 const MAX_IMG_SIZE = 2; //MB
 const MAX_VIDEO_SIZE = 10; //MB
 const MAX_IMG_SIZE_ERROR_MSG = `Dung lượng tối đa của file hình là ${MAX_IMG_SIZE}MB`;
-const MAX_VIDEO_SIZE_ERROR_MSG = `Dung lượng tối đa của file hình là ${MAX_VIDEO_SIZE}MB`;
+const MAX_VIDEO_SIZE_ERROR_MSG = `Dung lượng tối đa của file video là ${MAX_VIDEO_SIZE}MB`;
 
 function checkValidFileSize() {
 	const fileInput = document.querySelector('#file-input');
