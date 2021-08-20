@@ -21,21 +21,21 @@ public class ServerInitializer implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
 //        String path = context.getRealPath("/") + "WEB-INF\\classes\\static\\uploadFiles";
-        String path = "uploadFiles";
+//        String path = "uploadFiles";
 
-        File uploadFolder = new File(path);
-
-        if(!uploadFolder.exists()){
-            uploadFolder.mkdirs();
-        }
+//        File uploadFolder = new File(path);
+//
+//        if(!uploadFolder.exists()){
+//            uploadFolder.mkdirs();
+//        }
 
         //list files in local
-        String contents[] = SAVED_FILE.list();
-        for (String content: contents) {
-            byte[] bytes = Files.readAllBytes(Paths.get(LOCAL_FOLDER + content));
-            String dest = path + "\\" + content;
-            FileOutputStream fout = new FileOutputStream(dest);
-            fout.write(bytes);
-        }
+//        String contents[] = SAVED_FILE.list();
+//        for (String content: contents) {
+//            byte[] bytes = Files.readAllBytes(Paths.get(LOCAL_FOLDER + content));
+//            String dest = path + "\\" + content;
+//            FileOutputStream fout = new FileOutputStream(dest);
+//            fout.write(bytes);
+//        }
     }
 }
