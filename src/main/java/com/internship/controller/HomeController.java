@@ -60,11 +60,4 @@ public class HomeController {
 
         return ResponseEntity.ok(post);
     }
-
-    @GetMapping("/confirm")
-    public String comfirmPage() {
-        return "confirm";
-    }
-
-
 }
