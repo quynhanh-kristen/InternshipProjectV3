@@ -1,4 +1,4 @@
-package com.internship.InternshipProjectV3.post.impl;
+package com.internship.service.impl;
 
 import com.internship.dto.MyUserDetails;
 import com.internship.model.Account;
