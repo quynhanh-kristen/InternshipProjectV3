@@ -1,6 +1,5 @@
 package com.internship.service.impl;
 
-import com.internship.service.impl.UserDetailsServiceImpl;
 import com.internship.dto.MyUserDetails;
 import com.internship.model.Account;
 import com.internship.repository.AccountRepository;
