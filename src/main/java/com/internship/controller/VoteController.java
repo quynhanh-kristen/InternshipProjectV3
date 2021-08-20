@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Date;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -70,7 +68,10 @@ public class VoteController {
     }
 
     @PostMapping("/unVote")
-    public ResponseEntity<?> unVote(@RequestParam(name = "post_id") int post_id, @RequestParam(name = "user_ip") String user_ip){
+    public ResponseEntity<?> unVote(@RequestParam(name = "post_id") int post_id,
+                                    @RequestParam(name = "user_ip") String user_ip,
+                                    HttpServletRequest request){
+        user_ip = requestService.getClientIp(request);
         try {
             voteService.delete(user_ip);
             Post post = postService.findById(post_id);
