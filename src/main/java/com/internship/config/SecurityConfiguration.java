@@ -1,7 +1,7 @@
 package com.internship.config;
 
 import com.internship.security.filter.BeforeAuthenticationFilter;
-import com.internship.InternshipProjectV3.post.impl.UserDetailsServiceImpl;
+import com.internship.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,8 +1,7 @@
 package com.internship.controller;
 
 import com.internship.model.Post;
-import com.internship.InternshipProjectV3.post.impl.PostServiceImpl;
-import com.internship.utils.ImageProcessing;
+import com.internship.service.impl.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
