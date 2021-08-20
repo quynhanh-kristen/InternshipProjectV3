@@ -9,6 +9,9 @@ var ip;
 var tempIdPost;
 var votedPost;
 
+let token = $("meta[name='_csrf']").attr("content");
+let header = $("meta[name='_csrf_header']").attr("content");
+
 var showDetail = function(id){
     modal.style.display = "flex";
     var req = new XMLHttpRequest();
@@ -119,6 +122,7 @@ var doVote = function (post_id){
                     votedPost = "";
                 }
             });
+            req.setRequestHeader(header, token);
             req.send(null);
         } else {
             showNoticeVotedModal();
@@ -140,6 +144,7 @@ var doVote = function (post_id){
                 console.log("vote thành công")
             }
         });
+        req.setRequestHeader(header, token);
         req.send(null);
     }
 }
@@ -164,6 +169,7 @@ var doVoteInModal = function (){
                         votedPost = "";
                     }
                 });
+                req.setRequestHeader(header, token);
                 req.send(null);
             } else {
                 showNoticeVotedModal();
@@ -189,6 +195,7 @@ var doVoteInModal = function (){
 
                 }
             });
+            req.setRequestHeader(header, token);
             req.send(null);
         }
     }
