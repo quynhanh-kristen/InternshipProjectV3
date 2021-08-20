@@ -1,7 +1,6 @@
 var modal = document.getElementById("myModal");
 var btnCloseModal = document.getElementsByClassName("modal-controls-back")[0];
 var contentOut = document.getElementById("contentOut");
-
 var noticeVotedModal = document.getElementById("noticeVoted_modal");
 var noticeVotedContentOut = document.getElementById("noticeVoted_contentOut");
 
