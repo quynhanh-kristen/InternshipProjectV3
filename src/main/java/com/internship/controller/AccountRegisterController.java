@@ -18,7 +18,7 @@ import javax.validation.Valid;
 public class AccountRegisterController {
 
     @Autowired
-    private IAccountService IAccountService;
+    private IAccountService service;
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -52,7 +52,7 @@ public class AccountRegisterController {
         String confirmPassword = registrationDTO.getConfirmPassword();
 
         if(password != null && confirmPassword != null) {
-            if(!IAccountService.isConfirmPasswordEqualPassword(password, confirmPassword)) {
+            if(!service.isConfirmPasswordEqualPassword(password, confirmPassword)) {
                 bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "Mật khẩu xác nhận không khớp");
                 isError = true;
             }
@@ -62,13 +62,13 @@ public class AccountRegisterController {
         String username = registrationDTO.getUsername();
         if(username != null) {
             //check if username contains any special character
-            if(!IAccountService.isValidUsername(username)) {
+            if(!service.isValidUsername(username)) {
                 bindingResult.rejectValue("username", "error.username", "Tên đăng nhập không được chứa ký tự đặc biệt");
                 isError = true;
             }
 
             //check if username exists
-            if(IAccountService.isDuplicatedUsername(username)){
+            if(service.isDuplicatedUsername(username)){
                 bindingResult.rejectValue("username", "error.username", "Tên đăng nhập đã tồn tại");
                 isError = true;
             }
@@ -77,14 +77,12 @@ public class AccountRegisterController {
         //validate email
         String email = registrationDTO.getEmail();
         if(email != null) {
-            if(!IAccountService.isValidEmail(email)) {
-                if(IAccountService.isDuplicatedEmail(email)) {
-                    bindingResult.rejectValue("email", "error.email", "Email không hợp lệ");
-                    isError = true;
-                }
+            if(!service.isValidEmail(email)) {
+                bindingResult.rejectValue("email", "error.email", "Email không hợp lệ");
+                isError = true;
             }
 
-            if(IAccountService.isDuplicatedEmail(email)) {
+            if(service.isDuplicatedEmail(email)) {
                 bindingResult.rejectValue("email", "error.email", "Email đã tồn tại");
                 isError = true;
             }
@@ -93,7 +91,7 @@ public class AccountRegisterController {
         //validate phone number
         String phoneNumber = registrationDTO.getPhoneNumber();
         if(phoneNumber != null) {
-            if(!IAccountService.isValidPhoneNumber(phoneNumber)) {
+            if(!service.isValidPhoneNumber(phoneNumber)) {
                 bindingResult.rejectValue("phoneNumber", "error.phoneNumber", "Số điện thoại không hợp lệ");
                 isError = true;
             }
@@ -103,7 +101,7 @@ public class AccountRegisterController {
             return "registrationPage";
         }
 
-        IAccountService.save(registrationDTO);
+        service.save(registrationDTO);
 
         model.addAttribute("success", "Bạn đã đăng ký thành công");
         return "loginPage";

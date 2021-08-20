@@ -50,7 +50,7 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public Boolean isValidUsername(String username) {
-        return username.matches("^\\S*$");
+        return username.matches("^[a-zA-Z0-9]*$");
     }
 
     @Override
@@ -70,7 +70,7 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public Boolean isConfirmPasswordEqualPassword(String password, String confirmPassword) {
-        return confirmPassword.equalsIgnoreCase(password);
+        return confirmPassword.equals(password);
     }
 
     @Override
